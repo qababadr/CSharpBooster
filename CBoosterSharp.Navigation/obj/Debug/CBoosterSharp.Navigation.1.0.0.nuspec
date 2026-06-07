@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>CBoosterSharp.Navigation</id>
+    <version>1.0.0</version>
+    <authors>Badr Qaba</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/qababadr/CSharpBooster.git</projectUrl>
+    <description>A compile-time code generation toolkit for .NET applications that eliminates boilerplate</description>
+    <tags>DI Navigation SourceGenerator CodeGeneration MVVM WPF</tags>
+    <repository type="git" url="https://github.com/qababadr/CSharpBooster.git" />
+    <dependencies>
+      <group targetFramework="net10.0-windows7.0" />
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net10.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Navigation\bin\Debug\net10.0-windows\CBoosterSharp.Navigation.dll" target="lib\net10.0-windows7.0\CBoosterSharp.Navigation.dll" />
+    <file src="C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Navigation\README.md" target="\README.md" />
+  </files>
+</package>

@@ -1,0 +1,11 @@
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Navigation\bin\Release\net10.0-windows\CBoosterSharp.Navigation.deps.json
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Navigation\bin\Release\net10.0-windows\CBoosterSharp.Navigation.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Navigation\bin\Release\net10.0-windows\CBoosterSharp.Navigation.pdb
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Navigation\obj\Release\net10.0-windows\CBoosterSharp.Navigation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Navigation\obj\Release\net10.0-windows\CBoosterSharp.Navigation.AssemblyInfoInputs.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Navigation\obj\Release\net10.0-windows\CBoosterSharp.Navigation.AssemblyInfo.cs
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Navigation\obj\Release\net10.0-windows\CBoosterSharp.Navigation.csproj.CoreCompileInputs.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Navigation\obj\Release\net10.0-windows\CBoosterSharp.Navigation.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Navigation\obj\Release\net10.0-windows\refint\CBoosterSharp.Navigation.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Navigation\obj\Release\net10.0-windows\CBoosterSharp.Navigation.pdb
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Navigation\obj\Release\net10.0-windows\ref\CBoosterSharp.Navigation.dll

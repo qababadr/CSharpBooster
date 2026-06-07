@@ -1,0 +1,13 @@
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Debug\netstandard2.0\CBoosterSharp.SourceGenerators.deps.json
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Debug\netstandard2.0\CBoosterSharp.SourceGenerators.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Debug\netstandard2.0\CBoosterSharp.SourceGenerators.pdb
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Debug\netstandard2.0\CBoosterSharp.Core.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Debug\netstandard2.0\CBoosterSharp.Core.pdb
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\netstandard2.0\CBoosterSharp.SourceGenerators.csproj.AssemblyReference.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\netstandard2.0\CBoosterSharp.SourceGenerators.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\netstandard2.0\CBoosterSharp.SourceGenerators.AssemblyInfoInputs.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\netstandard2.0\CBoosterSharp.SourceGenerators.AssemblyInfo.cs
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\netstandard2.0\CBoosterSharp.SourceGenerators.csproj.CoreCompileInputs.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\netstandard2.0\CBooster.EAF5A0BB.Up2Date
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\netstandard2.0\CBoosterSharp.SourceGenerators.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\netstandard2.0\CBoosterSharp.SourceGenerators.pdb

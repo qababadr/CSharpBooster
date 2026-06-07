@@ -1,0 +1,50 @@
+﻿using CoreUI.Assets.Images;
+using CoreUI.Theme;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+
+namespace CoreUI.Component;
+
+/// <summary>
+/// Interaction logic for INotifyLogo.xaml
+/// </summary>
+public partial class INotifyLogo : UserControl
+{
+    public INotifyLogo()
+    {
+        InitializeComponent();
+        Loaded += OnLoaded;
+        ThemeSwitcher.ThemeChanged += OnThemeChanged;
+    }
+
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        UpdateSource(ThemeSwitcher.CurrentTheme);
+    }
+
+    private void OnThemeChanged(object? sender, ThemeDictionary theme)
+    {
+        Dispatcher.Invoke(() =>
+        {
+            UpdateSource(theme);
+        });
+    }
+
+    private void UpdateSource(ThemeDictionary theme)
+    {
+        string path =
+           theme == ThemeDictionary.Light
+               ? ImageResources.INotifyLight
+               : ImageResources.INotifyDark;
+
+        var bitmap = new BitmapImage();
+        bitmap.BeginInit();
+        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+        bitmap.UriSource = new Uri($"pack://application:,,,{path}", UriKind.Absolute);
+        bitmap.EndInit();
+        bitmap.Freeze();
+
+        PART_Image.Source = bitmap;
+    }
+}

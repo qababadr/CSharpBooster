@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageId>CBoosterSharp.Navigation</PackageId>
+		<Authors>Badr Qaba</Authors>
+		<Company>Badr Qaba</Company>
+		<Description>
+			A compile-time code generation toolkit for .NET applications that eliminates boilerplate
+		</Description>
+
+		<PackageTags>
+			DI;Navigation;SourceGenerator;CodeGeneration;MVVM;WPF;
+		</PackageTags>
+
+		<PackageProjectUrl>
+			https://github.com/qababadr/CSharpBooster.git
+		</PackageProjectUrl>
+
+		<RepositoryUrl>
+			https://github.com/qababadr/CSharpBooster.git
+		</RepositoryUrl>
+
+		<RepositoryType>git</RepositoryType>
+
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="README.md"
+			  Pack="true"
+			  PackagePath="\" />
+	</ItemGroup>
+</Project>

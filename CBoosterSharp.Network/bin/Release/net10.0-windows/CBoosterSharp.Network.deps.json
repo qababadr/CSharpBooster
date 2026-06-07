@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "CBoosterSharp.Network/1.0.0": {
+        "dependencies": {
+          "System.Security.Cryptography.ProtectedData": "10.0.8"
+        },
+        "runtime": {
+          "CBoosterSharp.Network.dll": {}
+        }
+      },
+      "System.Security.Cryptography.ProtectedData/10.0.8": {
+        "runtime": {
+          "lib/net10.0/System.Security.Cryptography.ProtectedData.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.826.23019"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CBoosterSharp.Network/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Security.Cryptography.ProtectedData/10.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/ldVgSfImIBp6fLWS7sLH0BnmtFj0ZwGlZo4Xx2q0K3ZhJNDbW45kj2f6zPoC+L+BTINuHdMzTsopuwmkbgcNA==",
+      "path": "system.security.cryptography.protecteddata/10.0.8",
+      "hashPath": "system.security.cryptography.protecteddata.10.0.8.nupkg.sha512"
+    }
+  }
+}

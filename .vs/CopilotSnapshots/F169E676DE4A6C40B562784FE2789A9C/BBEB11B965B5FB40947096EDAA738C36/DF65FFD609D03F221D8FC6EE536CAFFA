@@ -1,0 +1,107 @@
+﻿<UserControl 
+    x:Class="CoreUI.Component.DropZone.DropZone"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:CoreUI.Component.DropZone" 
+    xmlns:CoreUI="clr-namespace:CoreUI.Component"
+    xmlns:Strings="clr-namespace:CoreUI.Local"
+    xmlns:Animations="clr-namespace:CoreUI.Assets.Animations"
+    mc:Ignorable="d" 
+    xmlns:Images="clr-namespace:CoreUI.Assets.Images"
+    xmlns:lottie="clr-namespace:LottieSharp.WPF;assembly=LottieSharp"
+    d:DesignHeight="450" d:DesignWidth="800">
+    <Border 
+        x:Name="DropBorder"
+        AllowDrop="True"
+        BorderThickness="3"
+        CornerRadius="10"
+        Padding="5"
+        Background="{DynamicResource Background}"
+        DragEnter="DropBorder_DragEnter"
+        DragLeave="DropBorder_DragLeave"
+        DragOver="DropBorder_DragOver"
+        Drop="DropBorder_Drop">
+        <Border.BorderBrush>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <Rectangle Stroke="{StaticResource Primary}"
+                        StrokeThickness="4"
+                        StrokeDashArray="4 2"
+                        Width="{Binding 
+                        RelativeSource={RelativeSource AncestorType={x:Type Border}},
+                        Path=ActualWidth}"
+                        Height="{Binding 
+                        RelativeSource={RelativeSource AncestorType={x:Type Border}}, 
+                        Path=ActualHeight}"/>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Border.BorderBrush>
+        <Grid HorizontalAlignment="Center">
+            <Grid VerticalAlignment="Top" Margin="0,40">
+                <lottie:LottieAnimationView
+                    Name="PART_Lottie"
+                    Visibility="Collapsed"
+                    Width="280"
+                    Height="280"
+                    AutoPlay="True"
+                    RepeatCount="-1"
+                    ResourcePath="{x:Static Animations:AnimationResource.FileUpload}">
+                    <lottie:LottieAnimationView.RenderTransform>
+                        <TranslateTransform Y="-100"/>
+                    </lottie:LottieAnimationView.RenderTransform>
+                </lottie:LottieAnimationView>
+
+                <CoreUI:SVG
+                    Cursor="Hand"
+                    MouseLeftButtonUp="PART_SVG_MouseLeftButtonUp"
+                    x:Name="PART_SVG"
+                    Height="160"
+                    Width="160"
+                    Source="{x:Static Images:ImageResources.FileUpload}"/>
+
+            </Grid>
+
+            <StackPanel VerticalAlignment="Top">
+                <StackPanel.RenderTransform>
+                    <TranslateTransform Y="160"/>
+                </StackPanel.RenderTransform>
+                <TextBlock
+                    FontWeight="DemiBold"
+                    Style="{StaticResource BodyLarge}"
+                    Padding="0,12"
+                    Text="{Binding
+                    Text,
+                    RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+
+                <TextBlock
+                    FontStyle="Italic"
+                    FontWeight="DemiBold"
+                    Style="{StaticResource BodySmall}"
+                    Text="{Binding
+                    MimeTypeText,
+                    RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+
+            </StackPanel>
+
+            <ScrollViewer
+                Margin="0,12,0,0"
+                VerticalAlignment="Top"
+                Height="130">
+                <ScrollViewer.RenderTransform>
+                    <TranslateTransform Y="225"/>
+                </ScrollViewer.RenderTransform>
+                <StackPanel>
+                    <StackPanel
+                        x:Name="PreUploadedFilesPanel"/>
+                    <StackPanel
+                        x:Name="UploadedFilesPanel"
+                        Margin="0,4,0,0"/>
+                </StackPanel>
+            </ScrollViewer>
+
+        </Grid>
+
+    </Border>
+</UserControl>

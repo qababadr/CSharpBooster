@@ -1,0 +1,206 @@
+﻿using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
+
+namespace CoreUI.Component.AppWindow;
+
+/// <summary>
+/// Interaction logic for Dialog.xaml
+/// </summary>
+public partial class Dialog : Window
+{
+    /* =============================
+    * WindowTitle
+    * ============================= */
+    public static readonly DependencyProperty WindowTitleProperty =
+        DependencyProperty.Register(
+            nameof(WindowTitle),
+            typeof(string),
+            typeof(Dialog),
+            new PropertyMetadata(string.Empty));
+
+    public string WindowTitle
+    {
+        get => (string)GetValue(WindowTitleProperty);
+        set => SetValue(WindowTitleProperty, value);
+    }
+
+    /* =============================
+     * WindowBackground
+     * ============================= */
+    public static readonly DependencyProperty WindowBackgroundProperty =
+        DependencyProperty.Register(
+            nameof(WindowBackground),
+            typeof(Brush),
+            typeof(Dialog),
+            new PropertyMetadata(Brushes.White));
+
+    public Brush WindowBackground
+    {
+        get => (Brush)GetValue(WindowBackgroundProperty);
+        set => SetValue(WindowBackgroundProperty, value);
+    }
+
+    /* =============================
+     * WindowBorderBrush
+     * ============================= */
+    public static readonly DependencyProperty WindowBorderBrushProperty =
+        DependencyProperty.Register(
+            nameof(WindowBorderBrush),
+            typeof(Brush),
+            typeof(Dialog),
+            new PropertyMetadata(Brushes.Gray));
+
+
+    public Brush WindowBorderBrush
+    {
+        get => (Brush)GetValue(WindowBorderBrushProperty);
+        set => SetValue(WindowBorderBrushProperty, value);
+    }
+
+    /* =============================
+     * WindowBorderThickness
+     * ============================= */
+    public static readonly DependencyProperty WindowBorderThicknessProperty =
+        DependencyProperty.Register(
+            nameof(WindowBorderThickness),
+            typeof(Thickness),
+            typeof(Dialog),
+            new PropertyMetadata(new Thickness(0)));
+
+    public Thickness WindowBorderThickness
+    {
+        get => (Thickness)GetValue(WindowBorderThicknessProperty);
+        set => SetValue(WindowBorderThicknessProperty, value);
+    }
+
+    /* =============================
+     * TitleBackground
+     * ============================= */
+    public static readonly DependencyProperty TitleBackgroundProperty =
+        DependencyProperty.Register(
+            nameof(TitleBackground),
+            typeof(Brush),
+            typeof(Dialog),
+            new PropertyMetadata(Brushes.Aqua));
+
+    public Brush TitleBackground
+    {
+        get => (Brush)GetValue(TitleBackgroundProperty);
+        set => SetValue(TitleBackgroundProperty, value);
+    }
+
+    /* =============================
+     * TitleForeground
+     * ============================= */
+    public static readonly DependencyProperty TitleForegroundProperty =
+        DependencyProperty.Register(
+            nameof(TitleForeground),
+            typeof(Brush),
+            typeof(Dialog),
+            new PropertyMetadata(Brushes.White));
+
+    public Brush TitleForeground
+    {
+        get => (Brush)GetValue(TitleForegroundProperty);
+        set => SetValue(TitleForegroundProperty, value);
+    }
+
+    /* =============================
+     * TitleCornerRadius
+     * ============================= */
+    public static readonly DependencyProperty TitleCornerRadiusProperty =
+        DependencyProperty.Register(
+            nameof(TitleCornerRadius),
+            typeof(CornerRadius),
+            typeof(Dialog),
+            new PropertyMetadata(new CornerRadius(8, 8, 0, 0)));
+
+    public CornerRadius TitleCornerRadius
+    {
+        get => (CornerRadius)GetValue(TitleCornerRadiusProperty);
+        set => SetValue(TitleCornerRadiusProperty, value);
+    }
+
+    /* =============================
+     * TitleStyle
+     * ============================= */
+    public static readonly DependencyProperty TitleStyleProperty =
+        DependencyProperty.Register(
+            nameof(TitleStyle),
+            typeof(Style),
+            typeof(Dialog),
+            new PropertyMetadata(null));
+
+    public Style TitleStyle
+    {
+        get => (Style)GetValue(TitleStyleProperty);
+        set => SetValue(TitleStyleProperty, value);
+    }
+
+
+
+    public object Slot
+    {
+        get { return (object)GetValue(SlotProperty); }
+        set { SetValue(SlotProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for Slot.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty SlotProperty =
+        DependencyProperty.Register(
+            nameof(Slot),
+            typeof(object),
+            typeof(Dialog),
+            new PropertyMetadata(null)
+        );
+
+
+    public bool IsMaximazable
+    {
+        get { return (bool)GetValue(IsMaximazableProperty); }
+        set { SetValue(IsMaximazableProperty, value); }
+    }
+    public static readonly DependencyProperty IsMaximazableProperty =
+        DependencyProperty.Register(
+            nameof(IsMaximazable),
+            typeof(bool), typeof(Dialog),
+            new PropertyMetadata(false)
+        );
+
+
+
+    public static readonly string DialogId = "Dialog";
+
+    public Dialog()
+    {
+        InitializeComponent();
+    }
+
+    public void ShowWithBackdropFilter(string id = "Dialog")
+    {
+        if (Owner == null && Application.Current?.MainWindow != null && this != Application.Current.MainWindow)
+        {
+            try { Owner = Application.Current.MainWindow; } catch { /* ignore */ }
+        }
+        WindowTracker.Register(id, this);
+        ShowDialog();
+    }
+
+    private void OnCloseClick(object sender, MouseButtonEventArgs e)
+    {
+        Close();
+    }
+
+    private void OnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ChangedButton == MouseButton.Left)
+            DragMove();
+    }
+
+    private void OnWindowMaximized(object sender, MouseButtonEventArgs e)
+    {
+        WindowState
+            = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+    }
+}

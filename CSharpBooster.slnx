@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CBoosterSharp.Navigation/CBoosterSharp.Navigation.csproj" Id="d9718c37-a278-4f9e-8902-522589f4767a" />
+  <Project Path="CBoosterSharp.Network/CBoosterSharp.Network.csproj" Id="ba0b57ca-9aa8-4146-9bda-0e640d2ad79c" />
+  <Project Path="CBoosterSharp.Playground/CBoosterSharp.Playground.csproj" Id="3fb1ec65-9703-4dbd-a8cb-042f3760e86a" />
+  <Project Path="CBoosterSharp.SourceGenerators/CBoosterSharp.Generator.csproj" Id="9ecd4731-02a5-4401-9427-dd0bf44bd364" />
+</Solution>

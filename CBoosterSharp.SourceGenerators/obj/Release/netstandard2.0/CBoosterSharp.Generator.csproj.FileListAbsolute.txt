@@ -1,0 +1,10 @@
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Release\netstandard2.0\CBoosterSharp.Generator.deps.json
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Release\netstandard2.0\CBoosterSharp.Generator.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Release\netstandard2.0\CBoosterSharp.Generator.pdb
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Release\netstandard2.0\CBoosterSharp.Generator.csproj.AssemblyReference.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Release\netstandard2.0\CBoosterSharp.Generator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Release\netstandard2.0\CBoosterSharp.Generator.AssemblyInfoInputs.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Release\netstandard2.0\CBoosterSharp.Generator.AssemblyInfo.cs
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Release\netstandard2.0\CBoosterSharp.Generator.csproj.CoreCompileInputs.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Release\netstandard2.0\CBoosterSharp.Generator.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Release\netstandard2.0\CBoosterSharp.Generator.pdb

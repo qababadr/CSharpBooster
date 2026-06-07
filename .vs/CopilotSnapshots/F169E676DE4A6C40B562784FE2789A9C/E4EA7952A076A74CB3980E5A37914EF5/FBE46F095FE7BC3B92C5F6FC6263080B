@@ -1,0 +1,179 @@
+﻿using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Media;
+
+namespace CBoosterSharp.UI.Theme;
+
+public static class ThemeSwitcher
+{
+    public static event EventHandler<ThemeDefinition>? ThemeChanged;
+
+    public static ThemeDefinition? CurrentTheme { get; private set; }
+
+    private static readonly Dictionary<string, ThemeDefinition> _themes =
+        new(StringComparer.OrdinalIgnoreCase);
+
+    public static IReadOnlyCollection<ThemeDefinition> Themes =>
+        new ReadOnlyCollection<ThemeDefinition>(
+            _themes.Values.ToList());
+
+    // =========================================================
+    // REGISTRATION
+    // =========================================================
+
+    public static void RegisterTheme(
+        ThemeDefinition theme)
+    {
+        ArgumentNullException.ThrowIfNull(theme);
+
+        if (string.IsNullOrWhiteSpace(theme.Name))
+        {
+            throw new InvalidOperationException(
+                "Theme name cannot be null or empty.");
+        }
+
+        _themes[theme.Name] = theme;
+    }
+
+    public static void RegisterThemes(
+        params ThemeDefinition[] themes)
+    {
+        foreach (var theme in themes)
+        {
+            RegisterTheme(theme);
+        }
+    }
+
+    public static bool HasTheme(
+        string name)
+    {
+        return _themes.ContainsKey(name);
+    }
+
+    public static ThemeDefinition? GetTheme(
+        string name)
+    {
+        _themes.TryGetValue(name, out var theme);
+
+        return theme;
+    }
+
+    public static IReadOnlyCollection<string> GetAvailableThemes()
+    {
+        return _themes.Keys.ToList().AsReadOnly();
+    }
+
+    // =========================================================
+    // APPLY
+    // =========================================================
+
+    public static void ApplyTheme(
+        string name)
+    {
+        if (!_themes.TryGetValue(name, out var theme))
+        {
+            throw new InvalidOperationException(
+                $"Theme '{name}' is not registered.");
+        }
+
+        ApplyTheme(theme);
+    }
+
+    public static void ApplyTheme(
+        ThemeDefinition theme)
+    {
+        ArgumentNullException.ThrowIfNull(theme);
+
+        var dictionary =
+            new ResourceDictionary
+            {
+                Source = theme.Source
+            };
+
+        RemoveCurrentTheme();
+
+        Application.Current.Resources
+            .MergedDictionaries
+            .Add(dictionary);
+
+        CurrentTheme = theme;
+
+        ThemeChanged?.Invoke(
+            typeof(ThemeSwitcher),
+            theme);
+    }
+
+    private static void RemoveCurrentTheme()
+    {
+        var existingTheme =
+            Application.Current.Resources
+                .MergedDictionaries
+                .FirstOrDefault(d =>
+                    d.Source is not null &&
+                    d.Source.OriginalString.Contains(
+                        ";component/",
+                        StringComparison.OrdinalIgnoreCase));
+
+        if (existingTheme is not null)
+        {
+            Application.Current.Resources
+                .MergedDictionaries
+                .Remove(existingTheme);
+        }
+    }
+
+    // =========================================================
+    // RESOURCES
+    // =========================================================
+
+    public static bool HasResource(
+        string key)
+    {
+        return Application.Current
+            .TryFindResource(key) is not null;
+    }
+
+    public static object? GetResource(
+        string key)
+    {
+        return Application.Current
+            .TryFindResource(key);
+    }
+
+    public static T? GetResource<T>(
+        string key)
+        where T : class
+    {
+        return Application.Current
+            .TryFindResource(key) as T;
+    }
+
+    public static Brush GetBrush(
+        string key,
+        Brush? fallback = null)
+    {
+        var resource =
+            Application.Current.TryFindResource(key);
+
+        return resource as Brush
+            ?? fallback
+            ?? Brushes.Transparent;
+    }
+
+    public static Color GetColor(
+        string key,
+        Color? fallback = null)
+    {
+        var resource =
+            Application.Current.TryFindResource(key);
+
+        return resource switch
+        {
+            Color color => color,
+
+            SolidColorBrush brush => brush.Color,
+
+            _ => fallback ?? Colors.Transparent
+        };
+    }
+}

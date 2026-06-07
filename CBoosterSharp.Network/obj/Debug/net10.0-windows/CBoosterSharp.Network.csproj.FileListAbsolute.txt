@@ -1,0 +1,12 @@
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Network\bin\Debug\net10.0-windows\CBoosterSharp.Network.deps.json
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Network\bin\Debug\net10.0-windows\CBoosterSharp.Network.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Network\bin\Debug\net10.0-windows\CBoosterSharp.Network.pdb
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Network\obj\Debug\net10.0-windows\CBoosterSharp.Network.csproj.AssemblyReference.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Network\obj\Debug\net10.0-windows\CBoosterSharp.Network.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Network\obj\Debug\net10.0-windows\CBoosterSharp.Network.AssemblyInfoInputs.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Network\obj\Debug\net10.0-windows\CBoosterSharp.Network.AssemblyInfo.cs
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Network\obj\Debug\net10.0-windows\CBoosterSharp.Network.csproj.CoreCompileInputs.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Network\obj\Debug\net10.0-windows\CBoosterSharp.Network.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Network\obj\Debug\net10.0-windows\refint\CBoosterSharp.Network.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Network\obj\Debug\net10.0-windows\CBoosterSharp.Network.pdb
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.Network\obj\Debug\net10.0-windows\ref\CBoosterSharp.Network.dll

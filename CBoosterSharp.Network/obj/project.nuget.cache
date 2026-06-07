@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "iN6Ty7kAAgg=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Network\\CBoosterSharp.Network.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hp\\.nuget\\packages\\system.security.cryptography.protecteddata\\10.0.8\\system.security.cryptography.protecteddata.10.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,140 @@
+﻿<Window x:Class="CoreUI.Component.AppWindow.Dialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:CoreUI="clr-namespace:CoreUI.Component"
+        xmlns:Images="clr-namespace:CoreUI.Assets.Images"
+        xmlns:Converter="clr-namespace:CoreUI.Converter"
+        mc:Ignorable="d"
+        Title="{Binding 
+        WindowTitle, 
+        RelativeSource={RelativeSource Self}}"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="CanResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Converter:BooleanToVisibilityConverter
+            x:Key="BooleanToVisibility"/>
+    </Window.Resources>
+
+    <Grid>
+        <Border
+            CornerRadius="0,0,8,8"
+            Margin="0,0,0,8"
+            Background="#01FFFFFF">
+
+            <Border.Effect>
+                <DropShadowEffect
+                    BlurRadius="40"
+                    Opacity="0.1"
+                    ShadowDepth="6"
+                    Direction="270"
+                    Color="Black"/>
+            </Border.Effect>
+
+            <Border
+                Background="{DynamicResource Background}"
+                BorderBrush="{DynamicResource Background}"
+                CornerRadius="8,8,0,0">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border
+                        MouseDown="OnMouseDown"
+                        Padding="6"
+                        Background="{StaticResource Primary}"
+                        CornerRadius="8,8,0,0">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Margin="10"
+                                VerticalAlignment="Center"
+                                Text="{Binding 
+                                WindowTitle, 
+                                RelativeSource={RelativeSource AncestorType=Window}}"
+                                Foreground="{StaticResource Primary.Foreground}"
+                                Style="{StaticResource BodyMedium}"
+                                FontWeight="DemiBold"/>
+                            <StackPanel 
+                                Orientation="Horizontal"
+                                Grid.Column="1">
+                                <Border
+                                    Visibility="{Binding
+                                    IsMaximazable,
+                                    RelativeSource={RelativeSource AncestorType=Window},
+                                    Converter={StaticResource BooleanToVisibility}}"
+                                    Margin="20,0"
+                                    Height="{StaticResource MediumIconSize}"
+                                    Width="{StaticResource MediumIconSize}"
+                                    Cursor="Hand"
+                                    MouseDown="OnWindowMaximized"
+                                    Background="Transparent">
+                                    <CoreUI:SVG
+                                        FillColor="{Binding 
+                                        Source={StaticResource Primary.Foreground}, 
+                                        Path=Color}">
+                                        <CoreUI:SVG.Style>
+                                            <Style TargetType="{x:Type CoreUI:SVG}">
+                                                <!-- Default (Normal) -->
+                                                <Setter
+                                                    Property="Source"
+                                                    Value="{x:Static Images:ImageResources.WindowMaximize}" />
+
+                                                <Style.Triggers>
+                                                    <!-- When window is maximized -->
+                                                    <DataTrigger
+                                                        Binding="{Binding 
+                                                        WindowState, 
+                                                        RelativeSource={RelativeSource AncestorType=Window}}"
+                                                        Value="Maximized">
+                                                        <Setter
+                                                            Property="Source"
+                                                            Value="{x:Static Images:ImageResources.WindowMinimize}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </CoreUI:SVG.Style>
+                                    </CoreUI:SVG>
+                                </Border>
+
+                                <Border
+                                    Height="{StaticResource MediumIconSize}"
+                                    Width="{StaticResource MediumIconSize}"
+                                    Background="Transparent"
+                                    MouseDown="OnCloseClick"
+                                    Cursor="Hand"
+                                    Margin="0,0,8,0">
+                                    <CoreUI:SVG
+                                        FillColor="{Binding 
+                                        Source={StaticResource Primary.Foreground}, 
+                                        Path=Color}"
+                                        Source="{x:Static Images:ImageResources.CloseRound}"/>
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <ContentPresenter
+                        Grid.Row="1"
+                        Content="{Binding 
+                        Slot, 
+                        RelativeSource={RelativeSource AncestorType=Window}}"/>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</Window>

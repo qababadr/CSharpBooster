@@ -1,0 +1,35 @@
+﻿using CBoosterSharp.Generator.Attributes;
+using CBoosterSharp.Navigation.Core;
+using CBoosterSharp.Playground.Domain.Model;
+using System.Windows;
+
+namespace CBoosterSharp.Playground;
+
+[DIEntryPoint(name: "PlayGroundDependencies")]
+[RouteEntryPoint(name: "PlayGroundRoutes")]
+public partial class App : Application
+{
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
+
+        PlayGroundDependencies.InstallDependencies();
+        PlayGroundRoutes.RegisterRoutes();
+    }
+
+    private void OnLoad()
+    {
+        Router.Current.NavigateToProductsScreen();
+    }
+
+    private void OnButtonClick(Product product)
+    {
+        Router.Current.NavigateToProductDetailScreen(
+            product,
+            onNavigating: (string tag) =>
+            {
+                MessageBox.Show($"Navigating to product detail screen for {product.Name}");
+            }
+        );
+    }
+}

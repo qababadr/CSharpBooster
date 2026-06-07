@@ -1,0 +1,552 @@
+﻿using CBoosterSharp.Extensions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Text;
+using System.Text;
+using CBoosterSharp.Model;
+using System.Collections.Generic;
+
+namespace CBoosterSharp.Generators;
+
+[Generator]
+public sealed class CBoosterCodeGenerator : IIncrementalGenerator
+{
+    public void Initialize(IncrementalGeneratorInitializationContext context)
+    {
+        var pipeline =
+            context.SyntaxProvider.CreateSyntaxProvider(
+                predicate: static (node, _) =>
+                    node is TypeDeclarationSyntax t &&
+                    t.AttributeLists.Count > 0,
+
+                transform: static (ctx, _) =>
+                {
+                    if (ctx.SemanticModel.GetDeclaredSymbol((TypeDeclarationSyntax)ctx.Node)
+                        is not INamedTypeSymbol symbol)
+                        return null;
+
+                    var hasAny =
+                        symbol.HasAttribute("UsecaseableAttribute") ||
+                        symbol.HasAttribute("InjectableAttribute") ||
+                        symbol.HasAttribute("ModuleAttribute");
+
+                    return hasAny ? symbol : null;
+                }
+            )
+            .Where(static x => x is not null)
+            .Collect();
+
+        context.RegisterSourceOutput(pipeline, static (spc, symbols) =>
+        {
+            var arr = symbols.Where(s => s is not null).Select(s => s!).ToArray();
+            if (arr.Length == 0)
+                return;
+
+            GenerateAll(spc, arr);
+        });
+    }
+
+    private static void GenerateAll(SourceProductionContext context, INamedTypeSymbol[] symbols)
+    {
+        var features = new Dictionary<string, FeatureInfo>(StringComparer.Ordinal);
+
+        foreach (var symbol in symbols)
+        {
+            var ns = symbol.ContainingNamespace.ToDisplayString();
+            var name = symbol.Name;
+
+            // USECASES
+            if (symbol.HasAttribute("UsecaseableAttribute"))
+            {
+                var feature = GetFeatureName(name);
+                if (!features.TryGetValue(feature, out var fi))
+                {
+                    fi = new FeatureInfo { Namespace = ns };
+                    features[feature] = fi;
+                }
+
+                var attr = symbol.GetAttribute("UsecaseableAttribute");
+                var featureScope = DIScope.Singleton;
+                if (attr != null)
+                {
+                    var na = attr.NamedArguments.FirstOrDefault(kv => kv.Key == "DIScope");
+                    if (na.Value.Value is int enumVal)
+                        featureScope = (DIScope)enumVal;
+                }
+
+                var methods = symbol.GetMembers()
+                    .OfType<IMethodSymbol>()
+                    .Where(m => m.MethodKind == MethodKind.Ordinary)
+                    .ToList();
+
+                foreach (var method in methods)
+                {
+                    fi.Usecases.Add(new UsecaseInfo
+                    {
+                        MethodName = method.Name,
+                        ReturnType = method.ReturnType.ToDisplayString(),
+                        Parameters = method.Parameters.Select(p => (p.Type.ToDisplayString(), p.Name)).ToList(),
+                        RepoType = name,
+                        Scope = featureScope
+                    });
+                }
+            }
+
+            // INJECTABLE - support interface form (implementation name) and class form (scope)
+            if (symbol.HasAttribute("InjectableAttribute"))
+            {
+                var attr = symbol.GetAttribute("InjectableAttribute");
+                if (attr != null)
+                {
+                    var feature = GetFeatureName(symbol.Name);
+                    if (!features.TryGetValue(feature, out var fi))
+                    {
+                        fi = new FeatureInfo { Namespace = symbol.ContainingNamespace.ToDisplayString() };
+                        features[feature] = fi;
+                    }
+
+                    if (symbol.TypeKind == TypeKind.Interface)
+                    {
+                        // constructor arg may be implementation name
+                        string? impl = null;
+                        if (attr.ConstructorArguments.Length > 0)
+                        {
+                            impl = attr.ConstructorArguments[0].Value?.ToString();
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(impl))
+                        {
+                            fi.Injectables.Add(new InjectableInfo
+                            {
+                                ServiceType = symbol.Name,
+                                Impl = impl,
+                                Scope = DIScope.Singleton
+                            });
+                        }
+                    }
+                    else if (symbol.TypeKind == TypeKind.Class)
+                    {
+                        // class-level injectable: constructor arg might be DIScope
+                        var scope = DIScope.Singleton;
+                        if (attr.ConstructorArguments.Length > 0 && attr.ConstructorArguments[0].Value is int enumVal)
+                        {
+                            scope = (DIScope)enumVal;
+                        }
+
+                        fi.Injectables.Add(new InjectableInfo
+                        {
+                            ServiceType = symbol.Name,
+                            Impl = symbol.Name,
+                            Scope = scope
+                        });
+                    }
+                }
+            }
+
+            // MODULE provides
+            if (symbol.HasAttribute("ModuleAttribute"))
+            {
+                var feature = GetFeatureName(symbol.Name);
+                if (!features.TryGetValue(feature, out var fi))
+                {
+                    fi = new FeatureInfo { Namespace = symbol.ContainingNamespace.ToDisplayString() };
+                    features[feature] = fi;
+                }
+
+                var provides = symbol.GetMembers()
+                    .OfType<IMethodSymbol>()
+                    .Where(m => m.HasAttribute("ProvidesAttribute"))
+                    .ToList();
+
+                foreach (var method in provides)
+                {
+                    var pattr = method.GetAttribute("ProvidesAttribute");
+                    var scope = "Singleton";
+                    if (pattr != null && pattr.ConstructorArguments.Length > 0)
+                    {
+                        var val = pattr.ConstructorArguments[0].Value;
+                        if (val != null)
+                            scope = val.ToString() ?? "Singleton";
+                    }
+
+                    fi.Provides.Add(new ProvideInfo
+                    {
+                        MethodName = method.Name,
+                        ReturnType = method.ReturnType.ToDisplayString(),
+                        Scope = scope,
+                        ModuleName = symbol.Name
+                    });
+                }
+            }
+        }
+
+        // Emit files
+        foreach (var kv in features)
+        {
+            var feature = kv.Key;
+            var fi = kv.Value;
+            var ns = fi.Namespace;
+
+            // Build two files: one for usecases & wrapper, one for module registrations
+            var sbUse = new StringBuilder();
+            if (!string.IsNullOrWhiteSpace(ns))
+                sbUse.AppendLine($"namespace {ns};");
+            sbUse.AppendLine();
+
+            // UseCase classes (lightweight wrappers)
+            foreach (var u in fi.Usecases)
+            {
+                var nameUC = u.MethodName + "UseCase";
+                var parameters = string.Join(", ", u.Parameters.Select(p => $"{p.Type} {p.Name}"));
+                var args = string.Join(", ", u.Parameters.Select(p => p.Name));
+
+                sbUse.AppendLine($"public sealed class {nameUC}(");
+                sbUse.AppendLine($"    {u.RepoType} repository");
+                sbUse.AppendLine(")");
+                sbUse.AppendLine("{");
+                sbUse.AppendLine($"    public {u.ReturnType} InvokeAsync(");
+                if (!string.IsNullOrWhiteSpace(parameters))
+                    sbUse.AppendLine($"        {parameters}");
+                else
+                    sbUse.AppendLine("        ");
+                sbUse.AppendLine($"    )");
+                sbUse.AppendLine($"        => repository.{u.MethodName}(");
+                if (!string.IsNullOrWhiteSpace(args))
+                    sbUse.AppendLine($"            {args}");
+                else
+                    sbUse.AppendLine("            ");
+                sbUse.AppendLine("        );");
+                sbUse.AppendLine("}");
+                sbUse.AppendLine();
+            }
+
+            // UseCases wrapper (built separately so it can be embedded into the module file when a module exists)
+            var wrapperClass = string.Empty;
+            if (fi.Usecases.Count > 0)
+            {
+                var ctorParams = string.Join(", ", fi.Usecases.Select(u => $"{u.MethodName}UseCase {ToCamel(u.MethodName + "UseCase")}"));
+                var fields = string.Join("\n", fi.Usecases.Select(u => $"    public {u.MethodName}UseCase {u.MethodName} {{ get; }}"));
+
+                var sbWrapper = new StringBuilder();
+                sbWrapper.AppendLine($"public sealed class {feature}UseCases");
+                sbWrapper.AppendLine("{");
+                sbWrapper.AppendLine(fields);
+                sbWrapper.AppendLine();
+                sbWrapper.AppendLine($"    public {feature}UseCases({ctorParams})");
+                sbWrapper.AppendLine("    {");
+                foreach (var u in fi.Usecases)
+                {
+                    var prop = u.MethodName;
+                    var param = ToCamel(u.MethodName + "UseCase");
+                    sbWrapper.AppendLine($"        {prop} = {param};");
+                }
+                sbWrapper.AppendLine("    }");
+                sbWrapper.AppendLine("}");
+                sbWrapper.AppendLine();
+
+                // wrapperClass intentionally does NOT include a namespace line so it can be embedded into sbMod
+                wrapperClass = sbWrapper.ToString();
+            }
+
+            // Module file
+            var sbMod = new StringBuilder();
+            sbMod.AppendLine("using Microsoft.Extensions.DependencyInjection;");
+            sbMod.AppendLine("using CBoosterSharp.Container;");
+            sbMod.AppendLine();
+            if (!string.IsNullOrWhiteSpace(ns))
+                sbMod.AppendLine($"namespace {ns};");
+            sbMod.AppendLine();
+
+            // If there is a module for this feature, embed the usecase classes + wrapper into the module file
+            if (fi.Provides.Count > 0 || fi.Injectables.Count > 0)
+            {
+                // include the lightweight usecase classes (already built into sbUse) into the module file
+                if (!string.IsNullOrWhiteSpace(sbUse.ToString()))
+                    sbMod.Append(sbUse.ToString());
+
+                // append the wrapper class into the module file if present
+                if (!string.IsNullOrWhiteSpace(wrapperClass))
+                    sbMod.AppendLine(wrapperClass);
+            }
+
+            sbMod.AppendLine($"public sealed class {feature}DomainModule : IDIModule");
+            sbMod.AppendLine("{");
+            sbMod.AppendLine("    public void Install()");
+            sbMod.AppendLine("    {");
+
+            // Register injectables (explicit ones)
+            foreach (var inj in fi.Injectables)
+            {
+                var service = inj.ServiceType;
+                var impl = inj.Impl;
+                var scope = inj.Scope;
+
+                var reg = scope switch
+                {
+                    DIScope.Transient => $"        DIContainer.Shared.RegisterAsTransient<{service}, {impl}>();",
+                    DIScope.Scoped => $"        DIContainer.Shared.RegisterAsScoped<{service}, {impl}>();",
+                    _ => $"        DIContainer.Shared.RegisterAsSingleton<{service}, {impl}>();"
+                };
+
+                sbMod.AppendLine(reg);
+            }
+
+            // Register providers from modules
+            foreach (var p in fi.Provides)
+            {
+                var call = p.Scope == "Transient" ? "RegisterAsTransient" : "RegisterAsSingleton";
+                var wrapperName = $"__{p.ModuleName}_{p.MethodName}_Provider";
+                sbMod.AppendLine($"        DIContainer.Shared.{call}({wrapperName});");
+            }
+
+            // Register UseCases provider if any
+            if (fi.Usecases.Count > 0)
+            {
+                // determine scope from first usecase
+                var usecaseScope = fi.Usecases.First().Scope;
+                var call = usecaseScope == DIScope.Transient ? "RegisterAsTransient" : usecaseScope == DIScope.Scoped ? "RegisterAsScoped" : "RegisterAsSingleton";
+                sbMod.AppendLine($"        DIContainer.Shared.{call}(Provide{feature}UseCases);");
+            }
+
+            sbMod.AppendLine("    }");
+            sbMod.AppendLine();
+
+            // Provide UseCases
+            if (fi.Usecases.Count > 0)
+            {
+                sbMod.AppendLine($"    private static {feature}UseCases Provide{feature}UseCases(IServiceProvider provider)");
+                sbMod.AppendLine("    {");
+                sbMod.AppendLine($"        I{feature}Repository repository = provider\n            .GetRequiredService<I{feature}Repository>();");
+                sbMod.AppendLine();
+                sbMod.AppendLine($"        return new {feature}UseCases(");
+                sbMod.AppendLine($"            {string.Join(",\n            ", fi.Usecases.Select(u => $"new {u.MethodName}UseCase(repository)"))}");
+                sbMod.AppendLine("        );");
+                sbMod.AppendLine("    }");
+                sbMod.AppendLine();
+            }
+
+            // Provider wrappers for module provides
+            foreach (var p in fi.Provides)
+            {
+                var wrapperName = $"__{p.ModuleName}_{p.MethodName}_Provider";
+                sbMod.AppendLine($"    private static {p.ReturnType} {wrapperName}(IServiceProvider provider)");
+                sbMod.AppendLine("    {");
+                sbMod.AppendLine($"        return {p.ModuleName}.{p.MethodName}();");
+                sbMod.AppendLine("    }");
+                sbMod.AppendLine();
+            }
+
+            sbMod.AppendLine("}");
+
+            // Add sources: if a module exists for the feature, the module file (renamed) will contain the wrapper;
+            // otherwise emit a separate usecases file and the module file.
+            var moduleFile = $"{feature}DomainModule.g.cs";
+            if (fi.Provides.Count > 0)
+            {
+                // module contains both usecase classes and wrapper when a module exists
+                context.AddSource(moduleFile, SourceText.From(sbMod.ToString(), Encoding.UTF8));
+            }
+            else
+            {
+                var useFile = $"{feature}.UseCases.g.cs";
+                context.AddSource(useFile, SourceText.From(sbUse.ToString(), Encoding.UTF8));
+                context.AddSource(moduleFile, SourceText.From(sbMod.ToString(), Encoding.UTF8));
+            }
+        }
+    }
+
+    // ================= ENTRY =================
+
+    private static void Generate(SourceProductionContext context, INamedTypeSymbol symbol)
+    {
+        if (symbol.HasAttribute("UsecaseableAttribute"))
+            GenerateUsecases(context, symbol);
+
+        if (symbol.HasAttribute("InjectableAttribute"))
+            GenerateInjectable(context, symbol);
+
+        if (symbol.HasAttribute("ModuleAttribute"))
+            GenerateModule(context, symbol);
+    }
+
+    // ================= USECASES =================
+
+    private static void GenerateUsecases(SourceProductionContext context, INamedTypeSymbol symbol)
+    {
+        var ns = symbol.ContainingNamespace.ToDisplayString();
+        var repo = symbol.Name;
+        var feature = GetFeatureName(repo);
+
+        var methods = symbol.GetMembers()
+            .OfType<IMethodSymbol>()
+            .Where(m => m.MethodKind == MethodKind.Ordinary)
+            .ToList();
+
+        var useCases = new List<string>();
+
+        foreach (var method in methods)
+        {
+            var name = method.Name + "UseCase";
+            useCases.Add(name);
+
+            var parameters = BuildParameters(method.Parameters);
+            var args = string.Join(", ", method.Parameters.Select(p => p.Name));
+
+            var code = $@"
+namespace {ns};
+
+public sealed class {name}(
+    {repo} repository
+)
+{{
+    public {method.ReturnType.ToDisplayString()} InvokeAsync(
+        {parameters}
+    )
+        => repository.{method.Name}(
+            {args}
+        );
+}}";
+
+            context.AddSource($"{name}.g.cs", SourceText.From(code, Encoding.UTF8));
+        }
+
+        // UseCase Group DI (optional flag can be added later)
+        var providerBody = $@"
+I{feature}Repository repository =
+    provider.GetRequiredService<I{feature}Repository>();
+
+return new {feature}UseCases(
+    {string.Join(",\n        ", useCases.Select(u => $"new {u}(repository)"))}
+);";
+
+        var groupCode = $@"
+using Microsoft.Extensions.DependencyInjection;
+using CBoosterSharp.Container;
+
+namespace {ns};
+
+public sealed class {feature}DomainModule : IDIModule
+{{
+    public void Install()
+    {{
+        AppContainer.Shared.RegisterAsSingleton<I{feature}Repository, {repo}>();
+        AppContainer.Shared.RegisterAsSingleton(Provide{feature}UseCases);
+    }}
+
+    private static {feature}UseCases Provide{feature}UseCases(IServiceProvider provider)
+    {{
+        {providerBody}
+    }}
+}}";
+
+        context.AddSource($"{feature}.usecases.di.g.cs", groupCode);
+    }
+
+    // ================= INJECTABLE =================
+
+    private static void GenerateInjectable(SourceProductionContext context, INamedTypeSymbol symbol)
+    {
+        var attr = symbol.GetAttributes()
+            .FirstOrDefault(a => a.AttributeClass?.Name == "InjectableAttribute");
+
+        var impl = attr?.ConstructorArguments.Length > 0
+            ? attr.ConstructorArguments[0].Value?.ToString()
+            : null;
+
+        if (string.IsNullOrWhiteSpace(impl))
+            return;
+
+        var ns = symbol.ContainingNamespace.ToDisplayString();
+        var feature = GetFeatureName(symbol.Name);
+
+        var code = $@"
+using CBoosterSharp.Container;
+
+namespace {ns};
+
+public sealed class {feature}DomainModule : IDIModule
+{{
+    public void Install()
+    {{
+        AppContainer.Shared.RegisterAsSingleton<I{feature}Repository, {impl}>();
+    }}
+}}";
+
+        context.AddSource($"{feature}.injectable.g.cs", code);
+    }
+
+    // ================= MODULE + PROVIDES =================
+
+    private static void GenerateModule(SourceProductionContext context, INamedTypeSymbol symbol)
+    {
+        var ns = symbol.ContainingNamespace.ToDisplayString();
+        var moduleName = symbol.Name;
+
+        var provides = symbol.GetMembers()
+            .OfType<IMethodSymbol>()
+            .Where(m => m.HasAttribute("ProvidesAttribute"))
+            .ToList();
+
+        var registrations = new StringBuilder();
+
+        foreach (var method in provides)
+        {
+            var attr = method.GetAttributes()
+                .First(a => a.AttributeClass?.Name == "ProvidesAttribute");
+
+            var scope = attr.ConstructorArguments.Length > 0
+                ? attr.ConstructorArguments[0].Value?.ToString()
+                : "Singleton";
+
+            var call = scope == "Transient"
+                ? "RegisterAsTransient"
+                : "RegisterAsSingleton";
+
+            registrations.AppendLine(
+                $"        AppContainer.Shared.{call}({method.Name});"
+            );
+        }
+
+        var providerMethods = string.Join("\n\n", provides.Select(m => $@"
+    private static {m.ReturnType.ToDisplayString()} {m.Name}(IServiceProvider provider)
+    {{
+        return {m.Name}();
+    }}"));
+
+        var code = $@"
+using Microsoft.Extensions.DependencyInjection;
+using CBoosterSharp.Container;
+
+namespace {ns};
+
+public sealed class {moduleName} : IDIModule
+{{
+    public void Install()
+    {{
+{registrations}
+    }}
+
+{providerMethods}
+}}";
+
+        context.AddSource($"{moduleName}.module.g.cs", code);
+    }
+
+    // ================= HELPERS =================
+
+    //private static bool HasAttribute(this ISymbol symbol, string name)
+    //    => symbol.GetAttributes().Any(a => a.AttributeClass?.Name == name);
+
+    private static string GetFeatureName(string repo)
+        => repo.StartsWith("I") ? repo.Substring(1).Replace("Repository", "") : repo;
+
+    private static string BuildParameters(IEnumerable<IParameterSymbol> parameters)
+        => string.Join(", ", parameters.Select(p => $"{p.Type.ToDisplayString()} {p.Name}"));
+
+    private static string ToCamel(string name)
+    {
+        if (string.IsNullOrEmpty(name)) return name;
+        if (name.Length == 1) return name.ToLowerInvariant();
+        return char.ToLowerInvariant(name[0]) + name.Substring(1);
+    }
+}

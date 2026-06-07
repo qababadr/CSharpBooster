@@ -1,0 +1,776 @@
+﻿using CBoosterSharp.UI.Theme;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+
+namespace CoreUI.Component.Input;
+
+public enum TextFieldType
+{
+    Noraml,
+    AutoComplete,
+    Password,
+}
+
+public static class PasswordBoxAssistant
+{
+    public static readonly DependencyProperty BoundPassword = DependencyProperty.RegisterAttached(
+        "BoundPassword",
+        typeof(string),
+        typeof(PasswordBoxAssistant),
+        new FrameworkPropertyMetadata(
+            string.Empty,
+            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+            OnBoundPasswordChanged
+        )
+    );
+
+    public static string GetBoundPassword(DependencyObject dp)
+    {
+        return (string)dp.GetValue(BoundPassword);
+    }
+
+    public static void SetBoundPassword(DependencyObject dp, string value)
+    {
+        dp.SetValue(BoundPassword, value);
+    }
+
+    public static readonly DependencyProperty BindPassword = DependencyProperty.RegisterAttached(
+    "BindPassword",
+    typeof(bool),
+    typeof(PasswordBoxAssistant),
+    new PropertyMetadata(
+        false,
+        OnBindPasswordChanged
+       )
+    );
+
+    public static void SetBindPassword(DependencyObject dp, bool value)
+    {
+        dp.SetValue(BindPassword, value);
+    }
+
+    public static bool GetBindPassword(DependencyObject dp)
+    {
+        return (bool)dp.GetValue(BindPassword);
+    }
+
+
+    private static readonly DependencyProperty UpdatingPassword =
+       DependencyProperty.RegisterAttached(
+           "UpdatingPassword",
+           typeof(bool),
+           typeof(PasswordBoxAssistant),
+           new PropertyMetadata(false)
+       );
+
+    private static bool GetUpdatingPassword(DependencyObject dp)
+    {
+        return (bool)dp.GetValue(UpdatingPassword);
+    }
+
+    private static void SetUpdatingPassword(DependencyObject dp, bool value)
+    {
+        dp.SetValue(UpdatingPassword, value);
+    }
+
+    private static void OnBindPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not PasswordBox box)
+        {
+            return;
+        }
+
+        bool wasBound = (bool)(e.OldValue);
+        bool needToBind = (bool)(e.NewValue);
+
+        if (wasBound)
+        {
+            box.PasswordChanged -= HandlePasswordChanged;
+        }
+
+        if (needToBind)
+        {
+            box.PasswordChanged += HandlePasswordChanged;
+        }
+    }
+
+    private static void OnBoundPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not PasswordBox box || d == null || !GetBindPassword(box))
+        {
+            return;
+        }
+
+        box.PasswordChanged -= HandlePasswordChanged;
+
+        string newPassowrd = (string)e.NewValue;
+
+        if (!GetUpdatingPassword(box))
+        {
+            box.Password = newPassowrd;
+        }
+
+        box.PasswordChanged += HandlePasswordChanged;
+    }
+
+    private static void HandlePasswordChanged(object sender, RoutedEventArgs e)
+    {
+        if (sender is not PasswordBox box)
+            return;
+
+        SetUpdatingPassword(box, true);
+        SetBoundPassword(box, box.Password);
+        SetUpdatingPassword(box, false);
+    }
+}
+
+[ContentProperty(nameof(AutoCompleteTemplate))]
+public partial class TextField : UserControl
+{
+    public object LeadingContent
+    {
+        get { return (object)GetValue(LeadingContentProperty); }
+        set { SetValue(LeadingContentProperty, value); }
+    }
+    public static readonly DependencyProperty LeadingContentProperty = DependencyProperty.Register(
+        "LeadingContent",
+        typeof(object),
+        typeof(TextField)
+    );
+
+    public object TrailingContent
+    {
+        get { return (object)GetValue(TrailingContentProperty); }
+        set { SetValue(TrailingContentProperty, value); }
+    }
+
+    public static readonly DependencyProperty TrailingContentProperty = DependencyProperty.Register(
+        "TrailingContent",
+        typeof(object),
+        typeof(TextField)
+    );
+
+    public string Hint
+    {
+        get => (string)GetValue(HintProperty);
+        set => SetValue(HintProperty, value);
+    }
+
+    public static readonly DependencyProperty HintProperty = DependencyProperty.Register(
+        nameof(Hint),
+        typeof(string),
+        typeof(TextField),
+        new PropertyMetadata("")
+    );
+
+    public string Text
+    {
+        get => (string)GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
+    }
+
+    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+        nameof(Text),
+        typeof(string),
+        typeof(TextField),
+        new FrameworkPropertyMetadata(
+            string.Empty,
+            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault
+        )
+    );
+
+    public bool HasFocus
+    {
+        get { return (bool)GetValue(HasFocusProperty); }
+        set { SetValue(HasFocusProperty, value); }
+    }
+
+    public static readonly DependencyProperty HasFocusProperty = DependencyProperty.Register(
+        "HasFocus",
+        typeof(bool),
+        typeof(TextField),
+        new PropertyMetadata(false)
+    );
+
+    public string Label
+    {
+        get { return (string)GetValue(LabelProperty); }
+        set { SetValue(LabelProperty, value); }
+    }
+    public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(
+        "Label",
+        typeof(string),
+        typeof(TextField),
+        new PropertyMetadata("")
+    );
+
+    public CornerRadius BorderRadius
+    {
+        get { return (CornerRadius)GetValue(BorderRadiusProperty); }
+        set { SetValue(BorderRadiusProperty, value); }
+    }
+
+    public static readonly DependencyProperty BorderRadiusProperty = DependencyProperty.Register(
+        "BorderRadius",
+        typeof(CornerRadius),
+        typeof(TextField),
+        new PropertyMetadata(new CornerRadius(4))
+    );
+
+    public Thickness BorderWeight
+    {
+        get { return (Thickness)GetValue(BorderWeightProperty); }
+        set { SetValue(BorderWeightProperty, value); }
+    }
+
+    public static readonly DependencyProperty BorderWeightProperty = DependencyProperty.Register(
+        "BorderWeight",
+        typeof(Thickness),
+        typeof(TextField),
+        new PropertyMetadata(new Thickness(1))
+    );
+
+    public string AID
+    {
+        get { return (string)GetValue(AIDProperty); }
+        set { SetValue(AIDProperty, value); }
+    }
+
+    public static readonly DependencyProperty AIDProperty = DependencyProperty.Register(
+        "AID",
+        typeof(string),
+        typeof(TextField),
+        new PropertyMetadata("TextField")
+    );
+
+    public IEnumerable<object> Suggestions
+    {
+        get => (IEnumerable<object>)GetValue(SuggestionsProperty);
+        set => SetValue(SuggestionsProperty, value);
+    }
+
+    public static readonly DependencyProperty SuggestionsProperty = DependencyProperty.Register(
+        nameof(Suggestions),
+        typeof(IEnumerable<object>),
+        typeof(TextField),
+        new PropertyMetadata(null)
+    );
+
+    public DataTemplate? AutoCompleteTemplate
+    {
+        get => (DataTemplate?)GetValue(AutoCompleteTemplateProperty);
+        set => SetValue(AutoCompleteTemplateProperty, value);
+    }
+
+    public static readonly DependencyProperty AutoCompleteTemplateProperty =
+        DependencyProperty.Register(
+            nameof(AutoCompleteTemplate),
+            typeof(DataTemplate),
+            typeof(TextField),
+            new PropertyMetadata(null)
+        );
+
+    public Brush AutoCompleteBackgroundColor
+    {
+        get { return (Brush)GetValue(AutoCompleteBackgroundColorProperty); }
+        set { SetValue(AutoCompleteBackgroundColorProperty, value); }
+    }
+
+    public static readonly DependencyProperty AutoCompleteBackgroundColorProperty =
+        DependencyProperty.Register(
+            "AutoCompleteBackgroundColor",
+            typeof(Brush),
+            typeof(TextField),
+            new PropertyMetadata(Brushes.White)
+        );
+
+    public Brush BackgroundColor
+    {
+        get { return (Brush)GetValue(BackgroundColorProperty); }
+        set { SetValue(BackgroundColorProperty, value); }
+    }
+
+    public static readonly DependencyProperty BackgroundColorProperty = DependencyProperty.Register(
+        "BackgroundColor",
+        typeof(Brush),
+        typeof(TextField),
+        new PropertyMetadata(Brushes.White)
+    );
+
+    public Brush HighlightedSuggestedItemColor
+    {
+        get { return (Brush)GetValue(HighlightedSuggestedItemColorProperty); }
+        set { SetValue(HighlightedSuggestedItemColorProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for HighlightedSuggestedItemColor.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty HighlightedSuggestedItemColorProperty =
+        DependencyProperty.Register(
+            "HighlightedSuggestedItemColor",
+            typeof(Brush),
+            typeof(TextField),
+            new PropertyMetadata(Brushes.Gray)
+        );
+
+    public Brush SelectedSuggestedItemColor
+    {
+        get { return (Brush)GetValue(SelectedSuggestedItemColorProperty); }
+        set { SetValue(SelectedSuggestedItemColorProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for SelectedSuggestedItemColor.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty SelectedSuggestedItemColorProperty =
+        DependencyProperty.Register(
+            "SelectedSuggestedItemColor",
+            typeof(Brush),
+            typeof(TextField),
+            new PropertyMetadata(Brushes.LightGray)
+        );
+
+    public TextFieldType Type
+    {
+        get { return (TextFieldType)GetValue(TypeProperty); }
+        set { SetValue(TypeProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for Type.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(
+        nameof(Type),
+        typeof(TextFieldType),
+        typeof(TextField),
+        new PropertyMetadata(TextFieldType.Noraml, OnTypePropertyChange)
+    );
+
+    public string? ErrorMessage
+    {
+        get { return (string?)GetValue(ErrorMessageProperty); }
+        set { SetValue(ErrorMessageProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for ErrorMessage.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty ErrorMessageProperty = DependencyProperty.Register(
+        nameof(ErrorMessage),
+        typeof(string),
+        typeof(TextField),
+        new PropertyMetadata(null)
+    );
+
+    public bool ApplyValidationStyle
+    {
+        get { return (bool)GetValue(ApplyValidationStyleProperty); }
+        set { SetValue(ApplyValidationStyleProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for ApplyValidationStyle.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty ApplyValidationStyleProperty =
+        DependencyProperty.Register(
+            "ApplyValidationStyle",
+            typeof(bool),
+            typeof(TextField),
+            new PropertyMetadata(true)
+        );
+
+    public double AutoCompleteMaxHeight
+    {
+        get { return (double)GetValue(AutoCompleteMaxHeightProperty); }
+        set { SetValue(AutoCompleteMaxHeightProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for AutoCompleteMaxHeight.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty AutoCompleteMaxHeightProperty =
+        DependencyProperty.Register("AutoCompleteMaxHeight", typeof(double), typeof(TextField), new PropertyMetadata(400d));
+
+    public bool AcceptsReturn
+    {
+        get => (bool)GetValue(AcceptsReturnProperty);
+        set => SetValue(AcceptsReturnProperty, value);
+    }
+
+    public static readonly DependencyProperty AcceptsReturnProperty =
+        DependencyProperty.Register(
+            nameof(AcceptsReturn),
+            typeof(bool),
+            typeof(TextField),
+            new PropertyMetadata(false));
+
+    public TextWrapping TextWrapping
+    {
+        get => (TextWrapping)GetValue(TextWrappingProperty);
+        set => SetValue(TextWrappingProperty, value);
+    }
+
+    public static readonly DependencyProperty TextWrappingProperty =
+        DependencyProperty.Register(
+            nameof(TextWrapping),
+            typeof(TextWrapping),
+            typeof(TextField),
+            new PropertyMetadata(TextWrapping.Wrap));
+
+    public ScrollBarVisibility VerticalScrollBarVisibility
+    {
+        get => (ScrollBarVisibility)GetValue(VerticalScrollBarVisibilityProperty);
+        set => SetValue(VerticalScrollBarVisibilityProperty, value);
+    }
+
+    public static readonly DependencyProperty VerticalScrollBarVisibilityProperty =
+        DependencyProperty.Register(
+            nameof(VerticalScrollBarVisibility),
+            typeof(ScrollBarVisibility),
+            typeof(TextField),
+            new PropertyMetadata(ScrollBarVisibility.Auto));
+
+
+    public ScrollBarVisibility HorizontalScrollBarVisibility
+    {
+        get => (ScrollBarVisibility)GetValue(HorizontalScrollBarVisibilityProperty);
+        set => SetValue(HorizontalScrollBarVisibilityProperty, value);
+    }
+
+    public static readonly DependencyProperty HorizontalScrollBarVisibilityProperty =
+        DependencyProperty.Register(
+            nameof(HorizontalScrollBarVisibility),
+            typeof(ScrollBarVisibility),
+            typeof(TextField),
+            new PropertyMetadata(ScrollBarVisibility.Disabled));
+
+    public double MultilineMinHeight
+    {
+        get => (double)GetValue(MultilineMinHeightProperty);
+        set => SetValue(MultilineMinHeightProperty, value);
+    }
+
+    public static readonly DependencyProperty MultilineMinHeightProperty =
+        DependencyProperty.Register(
+            nameof(MultilineMinHeight),
+            typeof(double),
+            typeof(TextField),
+            new PropertyMetadata(null));
+
+
+
+    public bool UsingSurfaceAsLabelBackground
+    {
+        get { return (bool)GetValue(UsingSurfaceAsLabelBackgroundProperty); }
+        set { SetValue(UsingSurfaceAsLabelBackgroundProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for UsingSurfaceAsLabelBackground.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty UsingSurfaceAsLabelBackgroundProperty =
+        DependencyProperty.Register(nameof(UsingSurfaceAsLabelBackground), typeof(bool), typeof(TextField), new PropertyMetadata(false));
+
+
+    public event EventHandler<bool>? HasFocusChanged;
+    public event EventHandler<object>? SuggestedItemSelected;
+
+    private readonly SolidColorBrush? _labelBackgroundBrush;
+
+    public TextField()
+    {
+        InitializeComponent();
+
+        _labelBackgroundBrush = new SolidColorBrush(Colors.Transparent);
+
+        TextLabel.Background = _labelBackgroundBrush;
+
+        AttachFocusEvent();
+
+        AttachLostFocusEvent();
+
+        if (Type == TextFieldType.AutoComplete)
+        {
+            AttachUpdateDropdown();
+        }
+
+        Loaded += (_, _) =>
+        {
+            switch (Type)
+            {
+                case TextFieldType.Noraml:
+                    UseNormalTextBox();
+                    break;
+
+                case TextFieldType.AutoComplete:
+                    UseAutoComplete();
+                    break;
+
+                case TextFieldType.Password:
+                    UsePasswordBox();
+                    break;
+            }
+        };
+    }
+
+    private void AttachLostFocusEvent()
+    {
+        switch (Type)
+        {
+            case TextFieldType.Noraml:
+                AttachLostFocusForTextBox();
+                break;
+
+            case TextFieldType.AutoComplete:
+                AttachLostFocusForAutoComplete();
+                break;
+
+            case TextFieldType.Password:
+                AttachLostFocusForPasswordBox();
+                break;
+        }
+    }
+
+    private void AttachFocusEvent()
+    {
+        switch (Type)
+        {
+            case TextFieldType.Noraml:
+                AttachFocusEventForTextBox();
+                break;
+
+            case TextFieldType.AutoComplete:
+                AttachFocusEventForAutoComplete();
+                break;
+
+            case TextFieldType.Password:
+                AttachFocusEventForPasswordBox();
+                break;
+        }
+    }
+
+    private static void OnTypePropertyChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is TextField textField)
+        {
+            switch (textField.Type)
+            {
+                case TextFieldType.Noraml:
+                    textField.AttachFocusEventForTextBox();
+                    textField.AttachLostFocusForTextBox();
+                    textField.UseNormalTextBox();
+                    break;
+                case TextFieldType.AutoComplete:
+                    textField.AttachFocusEventForAutoComplete();
+                    textField.AttachLostFocusForAutoComplete();
+                    textField.AttachUpdateDropdown();
+                    textField.UseAutoComplete();
+                    break;
+                case TextFieldType.Password:
+                    textField.AttachFocusEventForPasswordBox();
+                    textField.AttachLostFocusForPasswordBox();
+                    textField.UsePasswordBox();
+                    break;
+            }
+        }
+    }
+
+    private void UseAutoComplete()
+    {
+        PART_NormalTextBox.Visibility = Visibility.Collapsed;
+        PART_PasswordBox.Visibility = Visibility.Collapsed;
+        PART_AutoCompleteTextBox.Visibility = Visibility.Visible;
+    }
+
+    private void AttachUpdateDropdown()
+    {
+        PART_AutoCompleteTextBox.AddHandler(
+            TextBoxBase.TextChangedEvent,
+            new TextChangedEventHandler((s, e) =>
+            {
+                UpdateDropdown();
+            })
+        );
+    }
+
+    private void UpdateDropdown()
+    {
+        bool hasSuggestions = Suggestions != null && Suggestions.Any();
+        bool hasText = !string.IsNullOrWhiteSpace(PART_AutoCompleteTextBox.Text);
+
+        PART_AutoCompleteTextBox.IsDropDownOpen = hasSuggestions && hasText;
+    }
+
+    private void AttachLostFocusForAutoComplete()
+    {
+        PART_AutoCompleteTextBox.LostFocus += (_, _) =>
+        {
+            HasFocus = false;
+            HasFocusChanged?.Invoke(this, false);
+            if (string.IsNullOrWhiteSpace(PART_AutoCompleteTextBox.Text))
+            {
+                AnimateLabelDown();
+            }
+
+            PART_AutoCompleteTextBox.IsDropDownOpen = false;
+        };
+    }
+
+    private void AttachFocusEventForAutoComplete()
+    {
+        TextLabel.Target = PART_AutoCompleteTextBox;
+        PART_AutoCompleteTextBox.GotFocus += (s, e) =>
+        {
+            HasFocus = true;
+            HasFocusChanged?.Invoke(this, true);
+
+            AnimateLabelUp();
+
+            UpdateDropdown();
+        };
+    }
+
+    private void UsePasswordBox()
+    {
+        PART_NormalTextBox.Visibility = Visibility.Collapsed;
+        PART_PasswordBox.Visibility = Visibility.Visible;
+        PART_AutoCompleteTextBox.Visibility = Visibility.Collapsed;
+    }
+
+    private void AttachLostFocusForPasswordBox()
+    {
+        TextLabel.Target = PART_PasswordBox;
+        PART_PasswordBox.GotFocus += (s, e) =>
+        {
+            HasFocus = true;
+            HasFocusChanged?.Invoke(this, true);
+
+            AnimateLabelUp();
+        };
+    }
+
+    private void AttachFocusEventForPasswordBox()
+    {
+        PART_PasswordBox.LostFocus += (_, _) =>
+        {
+            HasFocus = false;
+            HasFocusChanged?.Invoke(this, false);
+
+            if (string.IsNullOrWhiteSpace(PART_PasswordBox.Password))
+            {
+                AnimateLabelDown();
+            }
+        };
+    }
+
+    private void UseNormalTextBox()
+    {
+        PART_NormalTextBox.Visibility = Visibility.Visible;
+        PART_PasswordBox.Visibility = Visibility.Collapsed;
+        PART_AutoCompleteTextBox.Visibility = Visibility.Collapsed;
+    }
+
+    private void AttachLostFocusForTextBox()
+    {
+        PART_NormalTextBox.LostFocus += (_, _) =>
+        {
+            HasFocus = false;
+            HasFocusChanged?.Invoke(this, false);
+            if (string.IsNullOrWhiteSpace(PART_NormalTextBox.Text))
+            {
+                AnimateLabelDown();
+            }
+        };
+    }
+
+    private void AttachFocusEventForTextBox()
+    {
+        TextLabel.Target = PART_NormalTextBox;
+        PART_NormalTextBox.GotFocus += (s, e) =>
+        {
+            HasFocus = true;
+            HasFocusChanged?.Invoke(this, true);
+
+            AnimateLabelUp();
+        };
+    }
+
+    private void AnimateLabelUp()
+    {
+        var duration = TimeSpan.FromMilliseconds(200);
+
+        var yAnimation = new DoubleAnimation
+        {
+            To = -24,
+            Duration = duration,
+            EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut },
+        };
+
+        var xAnimation = new DoubleAnimation
+        {
+            To = -4,
+            Duration = duration,
+            EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut },
+        };
+
+        LabelTransform?.BeginAnimation(TranslateTransform.YProperty, yAnimation);
+        LabelTransform?.BeginAnimation(TranslateTransform.XProperty, xAnimation);
+
+        AnimateLabelBackgroundColor(
+            Colors.Transparent,
+            TargetLabelBackgroundColor()
+        );
+    }
+
+    private void AnimateLabelBackgroundColor(Color fromColor, Color toColor)
+    {
+        if (_labelBackgroundBrush == null)
+            return;
+
+        _labelBackgroundBrush.Color = fromColor;
+
+        var colorAnimation = new ColorAnimation
+        {
+            From = fromColor,
+            To = toColor,
+            Duration = TimeSpan.FromMilliseconds(200),
+            EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut },
+        };
+
+        _labelBackgroundBrush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnimation);
+    }
+
+    private void AnimateLabelDown()
+    {
+        var duration = TimeSpan.FromMilliseconds(200);
+
+        var yAnimation = new DoubleAnimation
+        {
+            To = 0,
+            Duration = duration,
+            EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut },
+        };
+
+        var xAnimation = new DoubleAnimation
+        {
+            To = 4,
+            Duration = duration,
+            EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut },
+        };
+
+        LabelTransform?.BeginAnimation(TranslateTransform.YProperty, yAnimation);
+        LabelTransform?.BeginAnimation(TranslateTransform.XProperty, xAnimation);
+
+        AnimateLabelBackgroundColor(
+            ThemeSwitcher.GetThemeBackgroundColor(),
+            Colors.Transparent
+        );
+    }
+
+    private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (sender is ComboBox comboBox && comboBox.SelectedItem is object selectedItem)
+        {
+            SuggestedItemSelected?.Invoke(this, selectedItem);
+        }
+    }
+
+    private Color TargetLabelBackgroundColor()
+    {
+        if (UsingSurfaceAsLabelBackground)
+            return ThemeSwitcher.GetThemeSurfaceColor();
+
+        return ThemeSwitcher.GetThemeBackgroundColor();
+    }
+}

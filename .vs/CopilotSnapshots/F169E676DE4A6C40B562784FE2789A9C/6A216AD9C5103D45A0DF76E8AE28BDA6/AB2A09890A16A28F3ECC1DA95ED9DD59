@@ -1,0 +1,240 @@
+﻿namespace CBoosterSharp.UI.Assets.Images;
+
+public static class ImageResources
+{
+    public static readonly string Information =
+        "/CoreUI;component/Assets/Images/information.svg";
+
+    public static readonly string ReportManager =
+        "/CoreUI;component/Assets/Images/gear-file-svgrepo-com.svg";
+
+    public static readonly string UpdatedReportNotification =
+        "/CoreUI;component/Assets/Images/edit-draw-svgrepo-com.svg";
+
+    public static readonly string ReportDetail =
+        "/CoreUI;component/Assets/Images/information-help-svgrepo-com.svg";
+
+    public static readonly string MyReports =
+        "/CoreUI;component/Assets/Images/file-lock-alt-svgrepo-com.svg";
+
+    public static readonly string MyReportsColored =
+        "/CoreUI;component/Assets/Images/file-part-2-svgrepo-com.svg";
+
+    public static readonly string EditReport =
+        "/CoreUI;component/Assets/Images/edit-svgrepo-com.svg";
+
+    public static readonly string EditDocument =
+        "/CoreUI;component/Assets/Images/edit-pen-write-svgrepo-com.svg";
+
+    public static readonly string BookHeart =
+        "/CoreUI;component/Assets/Images/book-heart.svg";
+
+    public static readonly string CheckCircle =
+        "/CoreUI;component/Assets/Images/check-circle.svg";
+
+    public static readonly string CloseCircle =
+        "/CoreUI;component/Assets/Images/close-circle.svg";
+
+    public static readonly string Error =
+        "/CoreUI;component/Assets/Images/error-svgrepo-com.svg";
+
+    public static readonly string Delete =
+        "/CoreUI;component/Assets/Images/delete.svg";
+
+    public static readonly string EmailOutline =
+        "/CoreUI;component/Assets/Images/email-outline.svg";
+
+    public static readonly string Eye =
+        "/CoreUI;component/Assets/Images/eye.svg";
+
+    public static readonly string EyeClosed =
+        "/CoreUI;component/Assets/Images/eye-closed.svg";
+
+    public static readonly string FullLogo =
+        "/CoreUI;component/Assets/Images/full_logo.svg";
+
+    public static readonly string LogoSmall =
+        "/CoreUI;component/Assets/Images/logo-small.svg";
+
+    public static readonly string Heart =
+        "/CoreUI;component/Assets/Images/heart.svg";
+
+    public static readonly string HeartOutline =
+        "/CoreUI;component/Assets/Images/heart-outline.svg";
+
+    public static readonly string HeartMinus =
+        "/CoreUI;component/Assets/Images/heart-minus.svg";
+
+    public static readonly string HeartPlus =
+        "/CoreUI;component/Assets/Images/heart-plus.svg";
+
+    public static readonly string Home =
+        "/CoreUI;component/Assets/Images/home.svg";
+
+    public static readonly string Lock =
+        "/CoreUI;component/Assets/Images/lock.svg";
+
+    public static readonly string Login =
+        "/CoreUI;component/Assets/Images/login.svg";
+
+    public static readonly string Logout =
+        "/CoreUI;component/Assets/Images/logout-svgrepo-com.svg";
+
+    public static readonly string Magnify =
+        "/CoreUI;component/Assets/Images/magnify.svg";
+
+    public static readonly string MoonWarningCrescent =
+        "/CoreUI;component/Assets/Images/moon-waning-crescent.svg";
+
+    public static readonly string Palette =
+        "/CoreUI;component/Assets/Images/palette.svg";
+
+    public static readonly string PictureImage =
+        "/CoreUI;component/Assets/Images/picture-image-svgrepo-com.svg";
+
+    public static readonly string SelectYourItemShopping =
+        "/CoreUI;component/Assets/Images/select-your-item-shopping-svgrepo-com.svg";
+
+    public static readonly string Tag =
+        "/CoreUI;component/Assets/Images/tag.svg";
+
+    public static readonly string WhiteBalanceSunny =
+        "/CoreUI;component/Assets/Images/white-balance-sunny.svg";
+
+    public static readonly string BlobBg =
+        "/CoreUI;component/Assets/Images/blob-bg.svg";
+
+    public static readonly string Bell =
+        "/CoreUI;component/Assets/Images/bell.svg";
+
+    public static readonly string FileUpload =
+        "/CoreUI;component/Assets/Images/file_upload.svg";
+
+    public static readonly string PNG =
+        "/CoreUI;component/Assets/Images/png-svgrepo-com.svg";
+
+    public static readonly string JPG =
+        "/CoreUI;component/Assets/Images/jpg-svgrepo-com.svg";
+
+    public static readonly string DeleteUploadedFile =
+        "/CoreUI;component/Assets/Images/garbage-trash-svgrepo-com.svg";
+
+    public static readonly string AppLogo =
+        "/CoreUI;component/Assets/Images/app_logo.png";
+
+    public static readonly string AddReport =
+        "/CoreUI;component/Assets/Images/add-file-svgrepo-com.svg";
+
+    public static readonly string Attachment =
+        "/CoreUI;component/Assets/Images/attachment-2-svgrepo-com.svg";
+
+    public static readonly string Maximize =
+        "/CoreUI;component/Assets/Images/maximize-square-svgrepo-com.svg";
+
+    public static readonly string WindowMaximize =
+        "/CoreUI;component/Assets/Images/maximize-expand-svgrepo-com.svg";
+
+    public static readonly string WindowMinimize =
+        "/CoreUI;component/Assets/Images/minimize-svgrepo-com.svg";
+
+    public static readonly string Label =
+        "/CoreUI;component/Assets/Images/label-svgrepo-com.svg";
+
+    public static readonly string TextContent =
+        "/CoreUI;component/Assets/Images/content-svgrepo-com.svg";
+
+    public static readonly string CloseRound =
+        "/CoreUI;component/Assets/Images/close-round-svgrepo-com.svg";
+
+    public static readonly string INotifyLight =
+        "/CoreUI;component/Assets/Images/i_notify_light.png";
+
+    public static readonly string INotifyDark =
+        "/CoreUI;component/Assets/Images/i_notify_dark.png";
+
+    public static readonly string NoUsers =
+        "/CoreUI;component/Assets/Images/no_users.svg";
+
+    public static readonly string NoSupportDocuments =
+        "/CoreUI;component/Assets/Images/no_support_documents.svg";
+
+    public static readonly string NoReports =
+        "/CoreUI;component/Assets/Images/no_reports.svg";
+
+    public static readonly string NoNotifications =
+        "/CoreUI;component/Assets/Images/no_notifications.svg";
+
+    public static readonly string Download =
+        "/CoreUI;component/Assets/Images/download-svgrepo-com.svg";
+
+    public static readonly string AddDocument =
+        "/CoreUI;component/Assets/Images/file-add-plus-svgrepo-com.svg";
+
+    public static readonly string AddUser =
+        "/CoreUI;component/Assets/Images/add-user-svgrepo-com.svg";
+
+    public static readonly string DashboardUsersCount =
+        "/CoreUI;component/Assets/Images/user-svgrepo-com.svg";
+
+    public static readonly string DashboardStorage =
+        "/CoreUI;component/Assets/Images/cld-cloud-network-folder-svgrepo-com.svg";
+
+    public static readonly string DashboardDocumentsCount =
+        "/CoreUI;component/Assets/Images/empty-drawer-svgrepo-com.svg";
+
+    public static readonly string DashboardReportsCount =
+        "/CoreUI;component/Assets/Images/graph-svgrepo-com.svg";
+
+    public static readonly string PDF =
+        "/CoreUI;component/Assets/Images/pdf-svgrepo-com.svg";
+
+    public static readonly string CheckGreen =
+        "/CoreUI;component/Assets/Images/check-mark-button-svgrepo-com.svg";
+
+    public static readonly string WarningRed =
+        "/CoreUI;component/Assets/Images/warning-svgrepo-com.svg";
+
+    public static readonly string EmptyPasswordRecoveryRequets =
+        "/CoreUI;component/Assets/Images/Two-factor-authentication-amico.svg";
+
+    public static readonly string PasswordUpdateMenu =
+        "/CoreUI;component/Assets/Images/door-key-password-svgrepo-com.svg";
+
+    public static readonly string NewReportNotification =
+        "/CoreUI;component/Assets/Images/report-svgrepo-com.svg";
+
+    public static readonly string NewSupportDocument =
+        "/CoreUI;component/Assets/Images/document-svgrepo-com.svg";
+
+    public static readonly string SplashScreenBackground =
+        "/CoreUI;component/Assets/Images/splashscreen_background.png";
+
+    public static readonly string Dashboard =
+        "/CoreUI;component/Assets/Images/dashboard-alt-svgrepo-com.svg";
+
+    public static readonly string ChangePassword =
+        "/CoreUI;component/Assets/Images/password-svgrepo-com.svg";
+
+    public static readonly string UsersManager =
+        "/CoreUI;component/Assets/Images/users-svgrepo-com.svg";
+
+    public static readonly string PasswordRecoveryRequests =
+        "/CoreUI;component/Assets/Images/gui-user-lock-svgrepo-com.svg";
+
+    public static readonly string LogoutColored =
+        "/CoreUI;component/Assets/Images/logout-colored-svgrepo-com.svg";
+
+    public static readonly string PasswordColored =
+        "/CoreUI;component/Assets/Images/password-colored-svgrepo-com.svg";
+
+    public static readonly string EmptySearchResult =
+        "/CoreUI;component/Assets/Images/Search-amico.svg";
+
+    public static readonly string ReportSearchNoImage =
+        "/CoreUI;component/Assets/Images/analytics-report-svgrepo-com.svg";
+
+    public static readonly string SuppportDocumentsManager =
+        "/CoreUI;component/Assets/Images/document-open-svgrepo-com.svg";
+    public static readonly string ArrowBack =
+        "/CoreUI;component/Assets/Images/arrow-left-svgrepo-com.svg";
+}

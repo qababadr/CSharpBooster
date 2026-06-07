@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="CoreUI.Component.Skeleton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CoreUI.Component"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border
+        CornerRadius="{Binding 
+        BorderRadius,
+        RelativeSource={RelativeSource AncestorType=UserControl}}"
+        SnapsToDevicePixels="True"
+        CacheMode="BitmapCache">
+
+        <Border.Background>
+            <LinearGradientBrush
+                StartPoint="0,0"
+                EndPoint="1,0">
+                <GradientStop
+                    x:Name="gsStart"
+                    Offset="0"
+                    Color="{Binding 
+                    ColorStart, 
+                    RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                <GradientStop
+                    x:Name="gsMiddle"
+                    Offset="0.5"
+                    Color="{Binding 
+                    ColorMiddle, 
+                    RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                <GradientStop
+                    x:Name="gsEnd"
+                    Offset="1"
+                    Color="{Binding 
+                    ColorEnd, 
+                    RelativeSource={RelativeSource AncestorType=UserControl}}" />
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard Name="SkeletonStoryboard">
+                    <Storyboard
+                        AutoReverse="True"
+                        RepeatBehavior="Forever">
+
+                        <DoubleAnimation
+                            Storyboard.TargetName="gsMiddle"
+                            Storyboard.TargetProperty="Offset"
+                            From="0"
+                            To="1"
+                            Duration="0:0:1"/>
+
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Border.Triggers>
+        
+    </Border>
+</UserControl>

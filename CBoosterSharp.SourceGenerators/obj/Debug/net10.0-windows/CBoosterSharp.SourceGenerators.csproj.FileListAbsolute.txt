@@ -1,0 +1,15 @@
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Debug\net10.0-windows\CBoosterSharp.SourceGenerators.deps.json
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Debug\net10.0-windows\CBoosterSharp.SourceGenerators.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Debug\net10.0-windows\CBoosterSharp.SourceGenerators.pdb
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Debug\net10.0-windows\CBoosterSharp.Core.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Debug\net10.0-windows\CBoosterSharp.Core.pdb
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\net10.0-windows\CBoosterSharp.SourceGenerators.csproj.AssemblyReference.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\net10.0-windows\CBoosterSharp.SourceGenerators.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\net10.0-windows\CBoosterSharp.SourceGenerators.AssemblyInfoInputs.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\net10.0-windows\CBoosterSharp.SourceGenerators.AssemblyInfo.cs
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\net10.0-windows\CBoosterSharp.SourceGenerators.csproj.CoreCompileInputs.cache
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\net10.0-windows\CBooster.EAF5A0BB.Up2Date
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\net10.0-windows\CBoosterSharp.SourceGenerators.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\net10.0-windows\refint\CBoosterSharp.SourceGenerators.dll
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\net10.0-windows\CBoosterSharp.SourceGenerators.pdb
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Debug\net10.0-windows\ref\CBoosterSharp.SourceGenerators.dll

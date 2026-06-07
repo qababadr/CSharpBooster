@@ -1,0 +1,8 @@
+﻿namespace CBoosterSharp.Model.Navigation;
+
+public sealed class RouteParameterInfo
+{
+    public required string Type { get; init; }
+
+    public required string PropertyName { get; init; }
+}

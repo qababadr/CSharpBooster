@@ -1,0 +1,55 @@
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+
+namespace CoreUI.Component.DropZone;
+
+/// <summary>
+/// Interaction logic for UploadedFile.xaml
+/// </summary>
+public partial class UploadedFile : UserControl
+{
+
+    public string Filename
+    {
+        get { return (string)GetValue(FilenameProperty); }
+        set { SetValue(FilenameProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for Filename.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty FilenameProperty =
+        DependencyProperty.Register(
+            nameof(Filename),
+            typeof(string),
+            typeof(UploadedFile),
+            new PropertyMetadata(string.Empty)
+        );
+
+
+    public UploadedMimeType MimeType
+    {
+        get { return (UploadedMimeType)GetValue(MimeTypeProperty); }
+        set { SetValue(MimeTypeProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for MimeType.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty MimeTypeProperty =
+        DependencyProperty.Register(
+            nameof(MimeType),
+            typeof(UploadedMimeType),
+            typeof(UploadedFile),
+            new PropertyMetadata(UploadedMimeType.PNG)
+        );
+
+    public event EventHandler? DeleteClicked;
+
+    public UploadedFile()
+    {
+        InitializeComponent();
+    }
+
+    private void OnDelete(object sender, MouseButtonEventArgs e)
+    {
+        DeleteClicked?.Invoke(this, e);
+    }
+}

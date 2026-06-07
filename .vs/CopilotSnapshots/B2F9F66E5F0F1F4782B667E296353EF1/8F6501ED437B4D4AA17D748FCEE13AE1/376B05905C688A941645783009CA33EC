@@ -1,0 +1,31 @@
+﻿using System.Collections.Generic;
+
+namespace CBoosterSharp.Model;
+
+internal sealed class FeatureInfo
+{
+    public string Namespace { get; set; } = string.Empty;
+    public List<UsecaseInfo> Usecases { get; } = new List<UsecaseInfo>();
+    public List<InjectableInfo> Injectables { get; } = new List<InjectableInfo>();
+    public List<ProvideInfo> Provides { get; } = new List<ProvideInfo>();
+}
+
+internal sealed class UsecaseInfo
+{
+    public string MethodName { get; set; } = string.Empty;
+    public string ReturnType { get; set; } = string.Empty;
+    public List<(string Type, string Name)> Parameters { get; set; } = new List<(string, string)>();
+    public string RepoType { get; set; } = string.Empty;
+}
+
+internal sealed class InjectableInfo
+{
+    public string Impl { get; set; } = string.Empty;
+}
+
+internal sealed class ProvideInfo
+{
+    public string MethodName { get; set; } = string.Empty;
+    public string ReturnType { get; set; } = string.Empty;
+    public string Scope { get; set; } = "Singleton";
+}

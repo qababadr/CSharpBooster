@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="CoreUI.Component.DropZone.UploadedFile"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CoreUI.Component.DropZone" 
+             xmlns:CoreUI="clr-namespace:CoreUI.Component"
+             xmlns:Converter="clr-namespace:CoreUI.Component.DropZone.Converter"
+             xmlns:Images="clr-namespace:CoreUI.Assets.Images"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Converter:MimeTypeToSVGSourceConverter
+            x:Key="MimeTypeToSVGSource"/>
+    </UserControl.Resources>
+
+    <Grid VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".1*"/>
+            <ColumnDefinition Width=".8*"/>
+            <ColumnDefinition Width=".1*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Icon -->
+        <CoreUI:SVG
+            Grid.Column="0"
+            Height="40"
+            Width="40"
+            Margin="0,0,16,0"
+            HorizontalAlignment="Left"
+            Source="{Binding
+            MimeType,
+            RelativeSource={RelativeSource AncestorType=UserControl},
+            Converter={StaticResource MimeTypeToSVGSource}}"/>
+
+        <!-- Filename -->
+        <TextBlock
+            TextWrapping="WrapWithOverflow"
+            HorizontalAlignment="Left"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Text="{Binding
+            Filename,
+            RelativeSource={RelativeSource AncestorType=UserControl}}"
+            Style="{StaticResource BodySmall}"
+            FontWeight="DemiBold"
+            Foreground="{StaticResource Foreground}"/>
+
+        <CoreUI:SVG
+            Cursor="Hand"
+            HorizontalAlignment="Right"
+            Grid.Column="2"
+            MouseDown="OnDelete"
+            Height="30"
+            Width="30"
+            Margin="16,0,0,0"
+            Source="{x:Static Images:ImageResources.DeleteUploadedFile}"/>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,154 @@
+﻿using CoreUI.Assets.Images;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+
+namespace CoreUI.Component;
+
+public enum WarningType
+{
+    Success, Warning, Error, Info
+}
+
+public partial class WarningMessage : UserControl
+{
+    public string Text
+    {
+        get => (string)GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
+    }
+    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+        nameof(Text),
+        typeof(string),
+        typeof(WarningMessage),
+        new PropertyMetadata(string.Empty)
+    );
+
+    public string AID
+    {
+        get { return (string)GetValue(AIDProperty); }
+        set { SetValue(AIDProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for AID.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty AIDProperty = DependencyProperty.Register(
+        "AID",
+        typeof(string),
+        typeof(WarningMessage),
+        new PropertyMetadata(nameof(WarningMessage))
+    );
+
+    public int IconSize
+    {
+        get => (int)GetValue(IconSizeProperty);
+        set => SetValue(IconSizeProperty, value);
+    }
+    public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
+        nameof(IconSize),
+        typeof(int),
+        typeof(WarningMessage),
+        new PropertyMetadata(25)
+    );
+
+    public string IconName
+    {
+        get => (string)GetValue(IconNameProperty);
+        set => SetValue(IconNameProperty, value);
+    }
+    public static readonly DependencyProperty IconNameProperty = DependencyProperty.Register(
+        nameof(IconName),
+        typeof(string),
+        typeof(WarningMessage),
+        new PropertyMetadata(ImageResources.Information)
+    );
+
+    public new Brush Background
+    {
+        get => (Brush)GetValue(BackgroundProperty);
+        set => SetValue(BackgroundProperty, value);
+    }
+    public static new readonly DependencyProperty BackgroundProperty = DependencyProperty.Register(
+        nameof(Background),
+        typeof(Brush),
+        typeof(WarningMessage),
+        new PropertyMetadata(Brushes.Green)
+    );
+
+    public bool IsActive
+    {
+        get => (bool)GetValue(IsActiveProperty);
+        set => SetValue(IsActiveProperty, value);
+    }
+    public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(
+        nameof(IsActive),
+        typeof(bool),
+        typeof(WarningMessage),
+        new PropertyMetadata(false, OnIsVisibleChanged)
+    );
+
+
+
+    public int DelayAperture
+    {
+        get { return (int)GetValue(DelayApertureProperty); }
+        set { SetValue(DelayApertureProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for DelayAperture.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty DelayApertureProperty =
+        DependencyProperty.Register("DelayAperture", typeof(int), typeof(WarningMessage), new PropertyMetadata(0));
+
+
+
+    public WarningMessage()
+    {
+        InitializeComponent();
+        Loaded += OnLoaded;
+    }
+
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        Root.Visibility = IsActive ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    private static void OnIsVisibleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is WarningMessage control)
+            control.Animate();
+    }
+
+    private async void Animate()
+    {
+        if (AnimatedScaleTransform == null)
+            return;
+
+        var show = IsActive;
+
+        if (show)
+        {
+            await Task.Delay(DelayAperture);
+            Root.Visibility = Visibility.Visible;
+        }
+
+        var animation = new DoubleAnimation
+        {
+            To = show ? 1 : 0,
+            Duration = TimeSpan.FromSeconds(0.3),
+            FillBehavior = FillBehavior.HoldEnd,
+        };
+
+        animation.Completed += (_, _) =>
+        {
+            if (!show)
+            {
+                Root.Visibility = Visibility.Collapsed;
+            }
+        };
+
+        AnimatedScaleTransform.BeginAnimation(
+           ScaleTransform.ScaleYProperty,
+           animation
+        );
+    }
+}

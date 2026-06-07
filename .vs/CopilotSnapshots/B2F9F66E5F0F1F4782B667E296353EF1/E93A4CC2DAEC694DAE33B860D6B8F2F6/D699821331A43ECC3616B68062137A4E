@@ -1,0 +1,142 @@
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Text;
+using System.Text;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace CBoosterSharp.Generators;
+
+[Generator]
+public sealed class DIEntryPointGenerator : IIncrementalGenerator
+{
+    public void Initialize(IncrementalGeneratorInitializationContext context)
+    {
+        var appPipeline =
+            context.SyntaxProvider.CreateSyntaxProvider(
+                predicate: static (node, _) =>
+                    node is ClassDeclarationSyntax cds &&
+                    cds.AttributeLists.Count > 0,
+
+                transform: static (ctx, _) =>
+                {
+                    var syntax = (ClassDeclarationSyntax)ctx.Node;
+
+                    if (ctx.SemanticModel.GetDeclaredSymbol(syntax)
+                        is not INamedTypeSymbol symbol)
+                        return ((INamedTypeSymbol, AttributeData)?)null;
+
+                    var attr = symbol.GetAttributes()
+                        .FirstOrDefault(a =>
+                            a.AttributeClass?.Name == "DIEntryPointAttribute");
+
+                    if (attr == null)
+                        return ((INamedTypeSymbol, AttributeData)?)null;
+
+                    return ((INamedTypeSymbol, AttributeData)?)( (symbol, attr) );
+                }
+            )
+            .Where(static x => x is not null);
+
+        var modulesPipeline =
+            context.CompilationProvider.Select(static (compilation, _) =>
+            {
+                var modules = new List<string>();
+
+                CollectModules(
+                    compilation.Assembly.GlobalNamespace,
+                    modules
+                );
+
+                return modules;
+            });
+
+        var combined =
+            appPipeline.Combine(modulesPipeline);
+
+        context.RegisterSourceOutput(
+            combined,
+            (spc, source) =>
+            {
+                var left = source.Left;
+                if (left is null) return;
+                var tuple = left.Value;
+                Generate(
+                    spc,
+                    tuple.Symbol,
+                    tuple.Attribute,
+                    source.Right
+                );
+            });
+    }
+
+    private static void Generate(
+        SourceProductionContext context,
+        INamedTypeSymbol appSymbol,
+        AttributeData attribute,
+        List<string> modules
+    )
+    {
+        var ns = appSymbol.ContainingNamespace.ToDisplayString();
+
+        var name =
+            attribute.ConstructorArguments.Length > 0
+                ? attribute.ConstructorArguments[0].Value?.ToString()
+                : "AppDependencies";
+
+        if (string.IsNullOrWhiteSpace(name))
+            name = "AppDependencies";
+
+        var registrations = string.Join(
+            "\n",
+            modules.Select(m =>
+                $"            .RegisterModule(new {m}())")
+        );
+
+        var code = $@"
+using CBoosterSharp.Container;
+
+namespace {ns};
+
+public static class {name}
+{{
+    public static void InstallDependencies()
+    {{
+        DIContainer.Shared
+{registrations}
+            .Build();
+    }}
+}}";
+
+        context.AddSource(
+            $"{name}.g.cs",
+            SourceText.From(code, Encoding.UTF8)
+        );
+    }
+
+    private static void CollectModules(
+        INamespaceSymbol ns,
+        List<string> modules
+    )
+    {
+        foreach (var member in ns.GetMembers())
+        {
+            if (member is INamespaceSymbol childNs)
+            {
+                CollectModules(childNs, modules);
+            }
+
+            if (member is INamedTypeSymbol type)
+            {
+                var implements =
+                    type.AllInterfaces.Any(i =>
+                        i.Name == "IDIModule");
+
+                if (!implements)
+                    continue;
+
+                modules.Add(type.ToDisplayString());
+            }
+        }
+    }
+}

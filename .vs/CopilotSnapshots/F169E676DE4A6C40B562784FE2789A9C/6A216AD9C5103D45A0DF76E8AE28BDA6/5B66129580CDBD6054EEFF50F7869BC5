@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="CoreUI.Component.Snackbar.Snackbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CoreUI.Component.Snackbar"
+             xmlns:svgl="https://github.com/dotnetprojects/SVGImage"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:Converter="clr-namespace:CoreUI.Converter"
+             xmlns:Images="clr-namespace:CoreUI.Assets.Images">
+
+    <UserControl.Resources>
+        <Converter:BooleanToVisibilityConverter
+            x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Border
+        x:Name="Root"
+        MinWidth="400"
+        MaxWidth="450"
+        MinHeight="60"
+        Opacity="0"
+        Padding="8"
+        CornerRadius="{StaticResource SMRadius}"
+        Visibility="Collapsed"
+        RenderTransformOrigin="0.5,1"
+        Background="{Binding State.BackgroundBrush}">
+
+        <Border.RenderTransform>
+            <TranslateTransform
+            x:Name="AnimatedTranslateTransform"
+            Y="48"/>
+        </Border.RenderTransform>
+
+        <Border.Effect>
+            <DropShadowEffect
+                BlurRadius="8"
+                Opacity="0.5"
+                ShadowDepth="2"
+                Color="Black"/>
+        </Border.Effect>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".9*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width=".9*" />
+                </Grid.ColumnDefinitions>
+
+                <svgl:SVGImage
+                    Width="{StaticResource LargeIconSize}"
+                    Height="{StaticResource LargeIconSize}"
+                    Margin="0,0,8,0"
+                    VerticalAlignment="Center"
+                    OverrideFillColor="{Binding
+                    Source={StaticResource Primary.Foreground},
+                    Path=Color}"
+                    Source="{Binding State.IconName}"/>
+
+                <TextBlock
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    AutomationProperties.AutomationId="{Binding
+                    AID,
+                    RelativeSource={RelativeSource AncestorType=UserControl}}"
+                    Foreground="{StaticResource Primary.Foreground}"
+                    Style="{StaticResource BodyMedium}"
+                    TextWrapping="Wrap"
+                    Text="{Binding State.Message}"/>
+            </Grid>
+            <Button
+                Margin="8,0,2,0"
+                VerticalAlignment="Top"
+                Grid.Column="1"
+                Style="{StaticResource UnstyledButton}"
+                Command="{Binding CloseCommand}"
+                Cursor="Hand"
+                Padding="16">
+                <svgl:SVGImage
+                    HorizontalAlignment="Center"
+                    Width="{StaticResource LargeIconSize}"
+                    Height="{StaticResource LargeIconSize}"
+                    VerticalAlignment="Center"
+                    OverrideFillColor="{Binding
+                    Source={StaticResource Primary.Foreground},
+                    Path=Color}" 
+                    Source="{x:Static Images:ImageResources.CloseCircle}"/>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>
