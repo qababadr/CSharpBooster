@@ -8,3 +8,4 @@ C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGe
 C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Release\netstandard2.0\CBoosterSharp.Generator.csproj.CoreCompileInputs.cache
 C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Release\netstandard2.0\CBoosterSharp.Generator.dll
 C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Release\netstandard2.0\CBoosterSharp.Generator.pdb
+C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\obj\Release\netstandard2.0\CBoosterSharp.Generator.sourcelink.json

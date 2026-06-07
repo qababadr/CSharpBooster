@@ -168,7 +168,7 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "CBoosterSharp.Generator/1.0.0": {
+      "CBoosterSharp.Generator/1.0.2": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -455,7 +455,7 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "CBoosterSharp.Generator/1.0.0": {
+    "CBoosterSharp.Generator/1.0.2": {
       "type": "project",
       "path": "../CBoosterSharp.SourceGenerators/CBoosterSharp.Generator.csproj",
       "msbuildProject": "../CBoosterSharp.SourceGenerators/CBoosterSharp.Generator.csproj"
@@ -468,7 +468,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0-windows": [
-      "CBoosterSharp.Generator >= 1.0.0",
+      "CBoosterSharp.Generator >= 1.0.2",
       "CBoosterSharp.Navigation >= 1.0.0",
       "CommunityToolkit.Mvvm >= 8.4.2"
     ]

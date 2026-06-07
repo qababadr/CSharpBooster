@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CBoosterSharp.Playground")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8fcfcbb416ac724efb647ca9015de62a20616678")]
 [assembly: System.Reflection.AssemblyProductAttribute("CBoosterSharp.Playground")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CBoosterSharp.Playground")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

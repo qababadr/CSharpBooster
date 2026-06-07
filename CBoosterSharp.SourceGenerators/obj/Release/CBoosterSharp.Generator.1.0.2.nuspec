@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CBoosterSharp.Generator</id>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
     <authors>Badr Qaba</authors>
     <license type="expression">MIT</license>
     <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
@@ -22,5 +22,6 @@
   <files>
     <file src="C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\README.md" target="\README.md" />
     <file src="C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Release\netstandard2.0\CBoosterSharp.Generator.dll" target="analyzers\dotnet\cs\CBoosterSharp.Generator.dll" />
+    <file src="C:\Users\hp\Documents\projects\desktop apps\CSharpBooster\CBoosterSharp.SourceGenerators\bin\Release\netstandard2.0\CBoosterSharp.Generator.dll" target="lib\netstandard2.0\CBoosterSharp.Generator.dll" />
   </files>
 </package>

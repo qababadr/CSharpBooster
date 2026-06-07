@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.SourceGenerators\\CBoosterSharp.Generator.csproj": {
-      "version": "1.0.0",
+      "version": "1.0.2",
       "restore": {
         "projectUniqueName": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.SourceGenerators\\CBoosterSharp.Generator.csproj",
         "projectName": "CBoosterSharp.Generator",

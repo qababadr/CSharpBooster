@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "CBoosterSharp.Generator/1.0.0": {
+      "CBoosterSharp.Generator/1.0.2": {
         "dependencies": {
           "CommunityToolkit.Mvvm": "8.4.2",
           "Microsoft.CodeAnalysis.CSharp": "5.3.0",
@@ -281,7 +281,7 @@
     }
   },
   "libraries": {
-    "CBoosterSharp.Generator/1.0.0": {
+    "CBoosterSharp.Generator/1.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

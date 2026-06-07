@@ -9,8 +9,10 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 		<PackageId>CBoosterSharp.Generator</PackageId>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
 		<Authors>Badr Qaba</Authors>
 		<Company>Badr Qaba</Company>
+		<Version>1.0.2</Version>
 		<Description>
 			A compile-time code generation toolkit for .NET applications that eliminates boilerplate
 		</Description>
@@ -48,5 +50,13 @@
 		<None Include="README.md"
 			  Pack="true"
 			  PackagePath="\" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="$(TargetDir)CBoosterSharp.Generator.dll"
+			  Pack="true"
+			  PackagePath="analyzers/dotnet/cs" />
+		<None Include="$(TargetDir)CBoosterSharp.Generator.dll"
+			  Pack="true"
+			  PackagePath="lib/netstandard2.0" />
 	</ItemGroup>
 </Project>

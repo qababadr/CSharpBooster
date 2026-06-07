@@ -7,12 +7,20 @@
       "RelativeMoniker": "D:0:0:{9ECD4731-02A5-4401-9427-DD0BF44BD364}|CBoosterSharp.SourceGenerators\\CBoosterSharp.Generator.csproj|solutionrelative:cboostersharp.sourcegenerators\\cboostersharp.generator.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3FB1EC65-9703-4DBD-A8CB-042F3760E86A}|CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj|c:\\users\\hp\\documents\\projects\\desktop apps\\csharpbooster\\cboostersharp.playground\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3FB1EC65-9703-4DBD-A8CB-042F3760E86A}|CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj|solutionrelative:cboostersharp.playground\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3FB1EC65-9703-4DBD-A8CB-042F3760E86A}|CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj|c:\\users\\hp\\documents\\projects\\desktop apps\\csharpbooster\\cboostersharp.playground\\cboostersharp.playground.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{3FB1EC65-9703-4DBD-A8CB-042F3760E86A}|CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj|solutionrelative:cboostersharp.playground\\cboostersharp.playground.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9ECD4731-02A5-4401-9427-DD0BF44BD364}|CBoosterSharp.SourceGenerators\\CBoosterSharp.Generator.csproj|c:\\users\\hp\\documents\\projects\\desktop apps\\csharpbooster\\cboostersharp.sourcegenerators\\attributes\\usecaseableattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9ECD4731-02A5-4401-9427-DD0BF44BD364}|CBoosterSharp.SourceGenerators\\CBoosterSharp.Generator.csproj|solutionrelative:cboostersharp.sourcegenerators\\attributes\\usecaseableattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9ECD4731-02A5-4401-9427-DD0BF44BD364}|CBoosterSharp.SourceGenerators\\CBoosterSharp.Generator.csproj|c:\\users\\hp\\documents\\projects\\desktop apps\\csharpbooster\\cboostersharp.sourcegenerators\\attributes\\dientrypointattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9ECD4731-02A5-4401-9427-DD0BF44BD364}|CBoosterSharp.SourceGenerators\\CBoosterSharp.Generator.csproj|solutionrelative:cboostersharp.sourcegenerators\\attributes\\dientrypointattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FB1EC65-9703-4DBD-A8CB-042F3760E86A}|CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj|c:\\users\\hp\\documents\\projects\\desktop apps\\csharpbooster\\cboostersharp.playground\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FB1EC65-9703-4DBD-A8CB-042F3760E86A}|CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj|solutionrelative:cboostersharp.playground\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3FB1EC65-9703-4DBD-A8CB-042F3760E86A}|CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj|c:\\users\\hp\\documents\\projects\\desktop apps\\csharpbooster\\cboostersharp.playground\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -78,50 +86,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\App.xaml.cs",
-              "RelativeDocumentMoniker": "CBoosterSharp.Playground\\App.xaml.cs",
-              "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\App.xaml.cs",
-              "RelativeToolTip": "CBoosterSharp.Playground\\App.xaml.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwBkAAAAhAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "UsecaseableAttribute.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.SourceGenerators\\Attributes\\UsecaseableAttribute.cs",
+              "RelativeDocumentMoniker": "CBoosterSharp.SourceGenerators\\Attributes\\UsecaseableAttribute.cs",
+              "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.SourceGenerators\\Attributes\\UsecaseableAttribute.cs",
+              "RelativeToolTip": "CBoosterSharp.SourceGenerators\\Attributes\\UsecaseableAttribute.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAUwBMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T19:12:27.829Z",
+              "WhenOpened": "2026-06-07T20:31:41.496Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "CBoosterSharp.Playground\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\MainWindow.xaml.cs",
-              "RelativeToolTip": "CBoosterSharp.Playground\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAiwA0AAAABAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "DIEntryPointAttribute.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.SourceGenerators\\Attributes\\DIEntryPointAttribute.cs",
+              "RelativeDocumentMoniker": "CBoosterSharp.SourceGenerators\\Attributes\\DIEntryPointAttribute.cs",
+              "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.SourceGenerators\\Attributes\\DIEntryPointAttribute.cs",
+              "RelativeToolTip": "CBoosterSharp.SourceGenerators\\Attributes\\DIEntryPointAttribute.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T19:13:24.076Z",
+              "WhenOpened": "2026-06-07T20:31:39.075Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "AuthViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Presentation\\AuthViewModel.cs",
-              "RelativeDocumentMoniker": "CBoosterSharp.Playground\\Presentation\\AuthViewModel.cs",
-              "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Presentation\\AuthViewModel.cs",
-              "RelativeToolTip": "CBoosterSharp.Playground\\Presentation\\AuthViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T19:11:07.15Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "ProductDetailScreen.xaml.cs",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Presentation\\ProductDetailScreen.xaml.cs",
               "RelativeDocumentMoniker": "CBoosterSharp.Playground\\Presentation\\ProductDetailScreen.xaml.cs",
@@ -129,12 +124,11 @@
               "RelativeToolTip": "CBoosterSharp.Playground\\Presentation\\ProductDetailScreen.xaml.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAAABUAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T19:11:31.391Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-07T19:11:31.391Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "ProductsScreen.xaml.cs",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Presentation\\ProductsScreen.xaml.cs",
               "RelativeDocumentMoniker": "CBoosterSharp.Playground\\Presentation\\ProductsScreen.xaml.cs",
@@ -142,12 +136,11 @@
               "RelativeToolTip": "CBoosterSharp.Playground\\Presentation\\ProductsScreen.xaml.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAAAQAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T19:11:48.095Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-07T19:11:48.095Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "FilePathService.cs",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Util\\FilePathService.cs",
               "RelativeDocumentMoniker": "CBoosterSharp.Playground\\Util\\FilePathService.cs",
@@ -155,38 +148,73 @@
               "RelativeToolTip": "CBoosterSharp.Playground\\Util\\FilePathService.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T19:11:57.828Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CBoosterSharp.Playground.csproj",
-              "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj",
-              "RelativeDocumentMoniker": "CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj",
-              "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj",
-              "RelativeToolTip": "CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-05-30T19:01:20.328Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-07T19:11:57.828Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CBoosterSharp.Generator",
+              "Title": "CBoosterSharp.Generator.csproj",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.SourceGenerators\\CBoosterSharp.Generator.csproj",
               "RelativeDocumentMoniker": "CBoosterSharp.SourceGenerators\\CBoosterSharp.Generator.csproj",
               "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.SourceGenerators\\CBoosterSharp.Generator.csproj",
               "RelativeToolTip": "CBoosterSharp.SourceGenerators\\CBoosterSharp.Generator.csproj",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAADAAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2026-06-07T19:06:23.045Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
+              "Title": "CBoosterSharp.Playground.csproj",
+              "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj",
+              "RelativeDocumentMoniker": "CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj",
+              "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj",
+              "RelativeToolTip": "CBoosterSharp.Playground\\CBoosterSharp.Playground.csproj",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAB7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-30T19:01:20.328Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AuthViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Presentation\\AuthViewModel.cs",
+              "RelativeDocumentMoniker": "CBoosterSharp.Playground\\Presentation\\AuthViewModel.cs",
+              "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Presentation\\AuthViewModel.cs",
+              "RelativeToolTip": "CBoosterSharp.Playground\\Presentation\\AuthViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-07T19:11:07.15Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "CBoosterSharp.Playground\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\MainWindow.xaml.cs",
+              "RelativeToolTip": "CBoosterSharp.Playground\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAiwA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-07T19:13:24.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\App.xaml.cs",
+              "RelativeDocumentMoniker": "CBoosterSharp.Playground\\App.xaml.cs",
+              "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\App.xaml.cs",
+              "RelativeToolTip": "CBoosterSharp.Playground\\App.xaml.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwBkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-07T19:12:27.829Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "LoaderController.cs",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Presentation\\LoaderController.cs",
               "RelativeDocumentMoniker": "CBoosterSharp.Playground\\Presentation\\LoaderController.cs",
@@ -194,12 +222,11 @@
               "RelativeToolTip": "CBoosterSharp.Playground\\Presentation\\LoaderController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T19:10:45.079Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-07T19:10:45.079Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "ProductFeatureRoutes.cs",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Presentation\\Navigation\\ProductFeatureRoutes.cs",
               "RelativeDocumentMoniker": "CBoosterSharp.Playground\\Presentation\\Navigation\\ProductFeatureRoutes.cs",
@@ -207,12 +234,11 @@
               "RelativeToolTip": "CBoosterSharp.Playground\\Presentation\\Navigation\\ProductFeatureRoutes.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T19:10:42.891Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-07T19:10:42.891Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "IAuthRepository.cs",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Domain\\IAuthRepository.cs",
               "RelativeDocumentMoniker": "CBoosterSharp.Playground\\Domain\\IAuthRepository.cs",
@@ -220,12 +246,11 @@
               "RelativeToolTip": "CBoosterSharp.Playground\\Domain\\IAuthRepository.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T19:09:31.704Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-07T19:09:31.704Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Domain\\Model\\Product.cs",
               "RelativeDocumentMoniker": "CBoosterSharp.Playground\\Domain\\Model\\Product.cs",
@@ -233,13 +258,12 @@
               "RelativeToolTip": "CBoosterSharp.Playground\\Domain\\Model\\Product.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T19:27:41.688Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-07T19:27:41.688Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "CBoosterSharp.Network",
+              "DocumentIndex": 15,
+              "Title": "CBoosterSharp.Network.csproj",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Network\\CBoosterSharp.Network.csproj",
               "RelativeDocumentMoniker": "CBoosterSharp.Network\\CBoosterSharp.Network.csproj",
               "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Network\\CBoosterSharp.Network.csproj",
@@ -251,8 +275,8 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "CBoosterSharp.Navigation",
+              "DocumentIndex": 16,
+              "Title": "CBoosterSharp.Navigation.csproj",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Navigation\\CBoosterSharp.Navigation.csproj",
               "RelativeDocumentMoniker": "CBoosterSharp.Navigation\\CBoosterSharp.Navigation.csproj",
               "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Navigation\\CBoosterSharp.Navigation.csproj",
@@ -264,7 +288,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "AuthDomainModule.cs",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\DI\\AuthDomainModule.cs",
               "RelativeDocumentMoniker": "CBoosterSharp.Playground\\DI\\AuthDomainModule.cs",
@@ -272,24 +296,22 @@
               "RelativeToolTip": "CBoosterSharp.Playground\\DI\\AuthDomainModule.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T19:06:55.782Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-07T19:06:55.782Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "ProductsScreen.xaml",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Presentation\\ProductsScreen.xaml",
               "RelativeDocumentMoniker": "CBoosterSharp.Playground\\Presentation\\ProductsScreen.xaml",
               "ToolTip": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Presentation\\ProductsScreen.xaml",
               "RelativeToolTip": "CBoosterSharp.Playground\\Presentation\\ProductsScreen.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-06-07T19:11:42.657Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-07T19:11:42.657Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "AuthRepositoryImpl.cs",
               "DocumentMoniker": "C:\\Users\\hp\\Documents\\projects\\desktop apps\\CSharpBooster\\CBoosterSharp.Playground\\Domain\\AuthRepositoryImpl.cs",
               "RelativeDocumentMoniker": "CBoosterSharp.Playground\\Domain\\AuthRepositoryImpl.cs",
@@ -297,8 +319,7 @@
               "RelativeToolTip": "CBoosterSharp.Playground\\Domain\\AuthRepositoryImpl.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T19:10:23.048Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-07T19:10:23.048Z"
             }
           ]
         }
